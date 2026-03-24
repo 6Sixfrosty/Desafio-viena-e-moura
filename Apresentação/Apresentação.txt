@@ -1,0 +1,24 @@
+Abertura: 
+
+"Bom dia/Boa tarde a todos. Meu nome é Bruno Lucas, sou aluno do técnico em Desenvolvimento de Sistemas aqui do SENAI. 
+A minha turma teve a oportunidade de fazer uma visita técnica a uma obra da Viana & Moura — que é uma construtora pernambucana, fundada aqui mesmo em Belo Jardim, com mais de 13 mil casas entregues pelo Nordeste. 
+As outras turmas não puderam ir, então vim aqui hoje pra trazer o que a gente viu de lá."
+
+Corpo da Apresentação:
+
+Quando chegamos na obra, a primeira coisa que chamou atenção foi a forma em que tudo e padronizado de forma industrial
+e registrado, desde o preparamento do solo para pavimentação, a contrução de cada casa, a alocação de funcionarios, o estoque de suprimentos.
+
+Eles nos mostraram primeiro a área de suprimentos. Imagina um conjunto de garagens, tudo organizado: o que chegou de material, o que ainda tá em estoque, o que sobrou, os destroços da obra. 
+E não tá só organizado fisicamente — tudo isso é registrado num sistema. Cada material que entra tem quantidade, data, tudo catalogado.
+
+Mas o que mais me impressionou foi o sistema de gestão deles em si. Eles têm um sistema onde dá pra acompanhar o andamento de cada casa individualmente. Não da obra toda de uma vez — de cada casa. 
+Você consegue ver em que etapa aquela construção tá, quanto material foi consumido nela, quanto tempo levou, e até os erros. Vou até dar um exemplo: se uma pia foi instalada 5 centímetros acima do padrão, e imediatamente enviado um pedido de aprovação para um gestor, para ver se essa pia com 5cm a mais pode ser mantida ou tera que ser refeita.
+
+Também tem a  alocação e controle de funcionarios: entrada e saída de cada trabalhador naquela obra, o dia, o turno. Como também a unidade em que esteve alocado e o tempo em que esteve em trabalho,
+basicamente Tudo rastreado e registrado.
+
+
+Facilitando e muito o dia a dia da obra, tendo tudo padronizado e registrado, conjunto com uma vizualização em tempo real de toda uma obra, assim otimizando a obra, e diminuindo pela metade a construção de um condominio, loteamento ou um predio
+E a impressão que dá é que esse sistema age por obra — cada canteiro tem o seu — mas as informações sobem pra algum lugar central, 
+onde os gestores conseguem ver tudo junto. Pelo menos foi essa a leitura que eu fiz do que eles apresentaram pra gente.

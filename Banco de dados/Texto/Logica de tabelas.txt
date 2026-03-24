@@ -1,0 +1,206 @@
+# 🧠 ESTRUTURA E LÓGICA DO BANCO DE DADOS (SISTEMA DE OBRA)
+
+---
+
+## 🔹 IDEIA GERAL DO SISTEMA
+
+Sistema de gestão de obra que controla:
+
+- 🏠 Unidades (casas)
+- 👷 Colaboradores
+- 📊 Etapas
+- 📦 Materiais / estoque
+- 📋 Pedidos
+- 📈 Progresso da obra
+- 🧾 Registro diário (log validado)
+
+---
+
+## 🔗 RELACIONAMENTOS PRINCIPAIS
+
+### 🧍 COLABORADORES
+colaboradores → departamentos  
+colaboradores → funcoes  
+
+- Cada colaborador pertence a 1 departamento  
+- Cada colaborador tem 1 função  
+
+👉 Relação: **1:N**
+
+---
+
+### 🏠 UNIDADES + ETAPAS
+unidades ← progressao_unidade → etapas  
+
+- Define em qual etapa cada unidade está  
+
+👉 Relação: **N:N (tabela intermediária)**
+
+---
+
+### 👷 ALOCAÇÃO DE COLABORADORES
+colaboradores → alocacao_colaboradores → unidades  
+
+- Define quem trabalha em qual unidade  
+
+👉 Relação: **N:N**
+
+---
+
+### 🧾 REGISTRO_DIARIO (CORE DO SISTEMA)
+registro_diario → colaboradores  
+registro_diario → unidades  
+registro_diario → etapas  
+
+Registra:
+- colaborador
+- unidade
+- etapa
+- data
+- horários
+
+👉 É o núcleo operacional do sistema
+
+---
+
+## ⚠️ 🔥 LÓGICA TR (VALIDAÇÃO COM TRIGGERS)
+
+(TR → colaboradores + progressao_unidade + alocacao_colaboradores)
+
+O `registro_diario` NÃO aceita dados livres.
+
+### ✔ Regras de validação:
+1. Colaborador deve estar alocado na unidade  
+2. Unidade deve estar na etapa informada  
+3. Registro deve refletir a realidade da obra  
+
+👉 Resultado:  
+`registro_diario` = **log validado e confiável**
+
+---
+
+## 📦 MATERIAIS E ESTOQUE
+
+### 🧱 ARMAZÉM
+armazem → materiais  
+
+Controla:
+- saldo_atual  
+- sobras  
+- destrocos  
+
+👉 Relação: **1:N ou 1:1 (dependendo da regra)**
+
+---
+
+### 🔄 MOVIMENTAÇÃO DE ESTOQUE
+movimentacoes_armazem → armazem  
+
+Registra:
+- entrada  
+- saída  
+- devolução  
+
+👉 Funciona como **histórico (log) de estoque**
+
+---
+
+## 📋 PEDIDOS
+
+### 📦 PEDIDOS
+pedidos → unidades  
+pedidos → materiais  
+
+Representa solicitação de material para uma unidade  
+
+---
+
+### 🧾 PEDIDOS_DETALHES (LOG)
+pedidos_detalhes → pedidos  
+pedidos_detalhes → colaboradores  
+pedidos_detalhes → etapas  
+
+- Apenas INSERT (não altera nem apaga)
+- Registra quem fez a ação
+
+👉 Padrão de auditoria
+
+---
+
+## 📈 PROGRESSÃO DA OBRA
+
+progressao_unidade → unidades  
+progressao_unidade → etapas  
+progressao_unidade → alocacao_colaboradores  
+
+Define:
+- etapa atual da unidade  
+- responsáveis  
+
+👉 Funciona como controle + histórico de evolução
+
+---
+
+## 🔄 FLUXO COMPLETO DO SISTEMA
+
+1. Unidade é criada  
+→ unidades  
+
+2. Etapa é definida  
+→ progressao_unidade  
+
+3. Colaboradores são alocados  
+→ alocacao_colaboradores  
+
+4. Trabalho é registrado  
+→ registro_diario (VALIDADO POR TR)  
+
+5. Material é solicitado  
+→ pedidos  
+
+6. Ação é registrada  
+→ pedidos_detalhes  
+
+7. Estoque é atualizado  
+→ movimentacoes_armazem  
+
+---
+
+## 💡 RESUMO DA ARQUITETURA
+
+### ✔ Camadas do sistema:
+
+- Base (cadastro)
+  - colaboradores
+  - unidades
+  - materiais
+
+- Operacional
+  - alocacao_colaboradores
+  - pedidos
+  - movimentacoes  
+
+- Controle
+  - progressao_unidade  
+
+- Auditoria / Log inteligente
+  - registro_diario
+  - pedidos_detalhes
+
+---
+
+## 🚀 DIFERENCIAL DO MODELO
+
+- Uso correto de **N:N**
+- Separação clara entre:
+  - operação
+  - controle
+  - histórico
+- Uso de **TR (validação por trigger)**
+- Logs inteligentes (não só histórico, mas consistência)
+
+---
+
+👉 Resumindo em uma frase:
+
+**Você criou um sistema orientado a consistência, onde nada é registrado sem antes validar a realidade da operação.**

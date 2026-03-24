@@ -1,0 +1,17 @@
+```
+Entidades que eu enxergo no sistema:
+
+Obra → a construção do condomínio em si (pode haver várias obras paralelas)
+
+Unidade → cada casa dentro da obra
+Etapa → as fases da construção de uma unidade (fundação, alvenaria, cobertura, acabamento...)
+
+
+Funcionário → trabalhadores, com registro de entrada/saída por obra
+
+
+Suprimento → cada tipo de material (cimento, vergalhão, tinta...)
+Entrada de Suprimento → o que chegou, quando, quanto
+Consumo de Suprimento → o que foi usado, em qual etapa, de qual unidade
+Ocorrência / Falha → erros registrados (ex: pia 5cm acima do padrão) vinculados a uma unidade e etapa
+```

@@ -1,0 +1,100 @@
+-- =========================================
+-- 📦 ## ESTRUTURA COMPLETA
+-- =========================================
+
+-- UNIDADES (casas)
+unidades
+- id_unidade (PK)
+- tipo ("Maior" | "Menor")
+- data_inicio
+
+-- ETAPAS
+etapas
+- id_etapa (PK)
+- ordem
+- nome
+
+-- DEPARTAMENTOS
+departamentos
+- id_departamento (PK)
+- nome
+
+-- FUNCOES
+funcoes
+- id_funcao (PK)
+- nome
+
+-- COLABORADORES
+colaboradores
+- id_colaborador (PK)
+- id_departamento (FK)
+- id_funcao (FK)
+- nome
+- cpf
+
+-- REGISTRO DIARIO DE COLABORADORES | Formato LOG: DEL, MOD, INS | TR -> colaboradores + progressao_unidade + alocacao_colaboradores
+registro_diario
+- id_registro (PK)
+- id_colaborador (TR)
+- id_unidade (TR)
+- id_etapa (TR)
+- data
+- horario_entrada
+- horario_saida
+
+-- MATERIAIS
+materiais
+- id_material (PK)
+- nome
+- unidade_medida
+
+-- ARMAZEM
+armazem
+- id_armazem (PK)
+- id_material (FK)
+- saldo_atual
+- sobras
+- destrocos
+
+-- PEDIDOS
+pedidos
+- id_pedido (PK)
+- id_unidade (FK)
+- id_material (FK)
+- quantidade_solicitada
+- quantidade_devolvida
+- data_pedido
+
+-- DETALHES DO PEDIDO | Formato LOG, apenas inserções
+pedidos_detalhes
+- id_detalhe (PK)
+- id_pedido (FK)
+- id_colaborador (FK)
+- id_etapa (FK)
+- data_hora
+
+
+
+## Tabelas em Produção
+
+-- PROGRESSAO DA UNIDADE | Formato LOG: DEL, MOD, INS | TR -> unidades + etapas
+progressao_unidade
+- id_progressao (PK)
+- id_unidade (TR)
+- id_etapa (TR)
+- id_alocacao (FK)
+
+-- MOVIMENTACAO DO ARMAZEM
+movimentacoes_armazem
+- id_movimentacao (PK)
+- id_armazem (FK)
+- tipo (ENTRADA / SAIDA / DEVOLUCAO)
+- quantidade
+- data
+- fornecedor
+
+-- ALOCACAO DE COLABORADORES
+alocacao_colaboradores
+- id_alocacao (PK)
+- id_colaborador (FK)
+- id_unidade (FK)
