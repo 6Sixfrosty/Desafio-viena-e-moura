@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Gestão de Obras - Visão Geral</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../styles/main.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="../../js/utils.js"></script>
+</head>
+
+<body>
+
+<div id="systemScreen" class="system-container">
+    <div class="container-fluid p-0">
+        <div class="row g-0">
+
+            <div class="col-md-3 col-lg-2 sidebar p-3 bg-dark d-flex flex-column" style="min-height: 100vh;">
+                
+                <div class="text-center mb-4 mt-2">
+                    <i class="bi bi-building fs-1 text-white-50"></i>
+                    <h5 class="text-white mt-2">Construtech</h5>
+                    <div class="user-info mt-3">
+                        <i class="bi bi-person-circle text-white-50 fs-4"></i><br>
+                        <span class="text-white fw-bold" id="userNameDisplay">Administrador Geral</span><br>
+                        <small class="badge bg-secondary mt-1" id="userRoleDisplay">👑 Acesso Total</small>
+                    </div>
+                </div>
+
+                <nav class="nav flex-column flex-grow-1" id="navMenu">
+                    
+                    <div class="menu-categoria">Mestre de Obras</div>
+                    <a class="nav-link active" href="#" id="menu-checklist">
+                        <i class="bi bi-clipboard-check"></i> Checklist Obra
+                    </a>
+                    <a class="nav-link" href="#" id="menu-ocorrencias">
+                        <i class="bi bi-exclamation-triangle"></i> Ocorrências
+                    </a>
+                    <a class="nav-link" href="#" id="menu-meus-pedidos">
+                        <i class="bi bi-cart-plus"></i> Meus Pedidos
+                    </a>
+
+                    <div class="menu-categoria">Almoxarifado</div>
+                    <a class="nav-link" href="#" id="menu-painel-pedidos">
+                        <i class="bi bi-inbox"></i> Painel de Pedidos
+                    </a>
+                    <a class="nav-link" href="#" id="menu-armazem">
+                        <i class="bi bi-building-warehouse"></i> Armazém Central
+                    </a>
+
+                    <div class="menu-categoria">Recursos Humanos</div>
+                    <a class="nav-link" href="#" id="menu-alocacao">
+                        <i class="bi bi-people"></i> Alocação Diária
+                    </a>
+                    <a class="nav-link" href="#" id="menu-relatorios">
+                        <i class="bi bi-file-earmark-bar-graph"></i> Relatórios Gerais
+                    </a>
+
+                </nav>
+
+                <hr class="bg-secondary mt-4 mb-3 border-secondary">
+                <div class="mt-auto">
+                    <button class="btn btn-outline-light w-100" id="logoutBtn">
+                        <i class="bi bi-box-arrow-left"></i> Sair do Sistema
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-md-9 col-lg-10 bg-light" id="main-content">
+                </div>
+
+        </div>
+    </div>
+</div>
+<script src="ajuda.js"></script>
+</body>
+</html>
