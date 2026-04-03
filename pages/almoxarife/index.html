@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Gestão de Obras - Visão Geral</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/pages/almoxarifeMain.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</head>
+
+<body>
+
+    <div id="systemScreen" class="system-container" style="display: block;">
+        <div class="container-fluid p-0">
+            <div class="row g-0">
+
+                <div class="col-md-3 col-lg-2 sidebar p-3 bg-dark d-flex flex-column" style="min-height: 100vh;">
+
+                    <div class="text-center mb-4 mt-2">
+                        <i class="bi bi-building fs-1 text-white-50"></i>
+                        <h5 class="text-white mt-2">Construtech</h5>
+                        <div class="user-info mt-3">
+                            <i class="bi bi-person-circle text-white-50 fs-4"></i><br>
+                            <span class="text-white fw-bold" id="userNameDisplay">getdaapi</span><br>
+                            <small class="badge bg-secondary mt-1" id="userRoleDisplay"> Almoxarife</small>
+                        </div>
+                    </div>
+
+                    <nav class="nav flex-column flex-grow-1" id="navMenu">
+
+                        <a class="nav-link active" data-page="armazem">
+                            <i class="bi bi-building-warehouse"></i> Armazém Central
+                        </a>
+                        <a class="nav-link" data-page="controle-estoque">
+                            <i class="bi bi-box-seam"></i> Controle de Estoque
+                        </a>
+                        <a class="nav-link" data-page="pedidos">
+                            <i class="bi bi-inbox"></i> Painel de Pedidos
+                        </a>
+                        <a class="nav-link" data-page="relatorios">
+                            <i class="bi bi-file-earmark-bar-graph"></i> Relatórios Gerais
+                        </a>
+
+                    </nav>
+
+                    <hr class="bg-secondary mt-4 mb-3 border-secondary">
+                    <div class="mt-auto">
+                        <button class="btn btn-outline-light w-100" id="logoutBtn" onclick="sair()">
+                            <i class="bi bi-box-arrow-left"></i> Sair do Sistema
+                        </button>
+                    </div>
+                </div>
+
+
+
+
+                <!-- ============================================================
+                                       CONTEÚDO PRINCIPAL 
+                    ============================================================ -->
+                <div class="col-md-9 col-lg-10 bg-light" id="main-content">
+
+
+
+                    <!-- ============================================================
+                                        PAINEL: ARMAZÉM CENTRAL
+                    ============================================================ -->
+                    <div id="armazem" class="p-4">
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-3">
+                                <div class="card border-0 shadow-sm rounded-3 h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-start">
+                                            <div>
+                                                <small class="text-muted fw-bold text-uppercase"
+                                                    style="font-size: 0.65rem;">Saldo em Estoque</small>
+                                                <h3 class="fw-bold m-0 mt-1" id="endpoint-total-materiais"></h3>
+                                            </div>
+                                            <div class="bg-warning bg-opacity-10 p-2 rounded">
+                                                <i class="bi bi-boxes text-warning fs-4"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div
+                                    class="card border-0 shadow-sm rounded-3 h-100 border-start border-danger border-4">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-start">
+                                            <div>
+                                                <small class="text-muted fw-bold text-uppercase"
+                                                    style="font-size: 0.65rem;">Abaixo do Mínimo</small>
+                                                <h3 class="fw-bold m-0 mt-1 text-danger" id="endpoint-estoque-critico">0
+                                                </h3>
+                                            </div>
+                                            <div class="bg-danger bg-opacity-10 p-2 rounded">
+                                                <i class="bi bi-exclamation-triangle text-danger fs-4"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="card border-0 shadow-sm rounded-3 h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-start">
+                                            <div>
+                                                <small class="text-muted fw-bold text-uppercase"
+                                                    style="font-size: 0.65rem;">Retiradas (Mês)</small>
+                                                <h3 class="fw-bold m-0 mt-1" id="endpoint-consumo-mes">0</h3>
+                                            </div>
+                                            <div class="bg-primary bg-opacity-10 p-2 rounded">
+                                                <i class="bi bi-graph-down text-primary fs-4"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="card border-0 shadow-sm rounded-3 h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-start">
+                                            <div>
+                                                <small class="text-muted fw-bold text-uppercase"
+                                                    style="font-size: 0.65rem;">Última Atividade</small>
+                                                <h6 class="fw-bold m-0 mt-1 text-truncate"
+                                                    id="endpoint-ultima-atividade">Nenhuma</h6>
+                                                <small class="text-muted" id="endpoint-data-atividade">--:--</small>
+                                            </div>
+                                            <div class="bg-info bg-opacity-10 p-2 rounded">
+                                                <i class="bi bi-clock-history text-info fs-4"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--
+                         <div class="d-flex gap-2 mb-3 overflow-auto pb-2" id="filtro-categorias">
+                            <button class="btn btn-dark btn-sm px-3 rounded-pill">Todos</button>
+                            <button class="btn btn-outline-secondary btn-sm px-3 rounded-pill">Estrutural</button>
+                            <button class="btn btn-outline-secondary btn-sm px-3 rounded-pill">Elétrica</button>
+                            <button class="btn btn-outline-secondary btn-sm px-3 rounded-pill">Hidráulica</button>
+                            <button class="btn btn-outline-secondary btn-sm px-3 rounded-pill">Ferramentas</button>
+                        </div>
+                        -->
+
+                        <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+                            <div
+                                class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
+                                <h5 class="m-0 fw-bold text-dark">Inventário</h5>
+                                <div class="input-group input-group-sm" style="max-width: 250px;">
+                                    <span class="input-group-text bg-light border-end-0"><i
+                                            class="bi bi-search"></i></span>
+                                    <input type="text" id="input-busca-inventario"
+                                        class="form-control bg-light border-start-0" placeholder="Buscar material...">
+                                </div>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle mb-0">
+                                    <thead class="table-light text-muted small text-uppercase">
+                                        <tr>
+                                            <th class="ps-4">Código / Material</th>
+                                            <th>Marca</th>
+                                            <th class="text-center">Saldo Atual</th>
+                                            <th class="text-center">Estoque Mínimo</th>
+                                            <th>Status Local</th>
+                                            <th class="text-end pe-4">Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tabelaArmazemBody" class="border-top-0">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div
+                            class="mt-4 d-flex justify-content-between align-items-center bg-white p-3 rounded-3 shadow-sm">
+                            <p class="text-muted small m-0">
+                                <i class="bi bi-info-circle"></i> Os dados acima refletem o estoque físico disponível no
+                                canteiro hoje.
+                            </p>
+                            <button id="btn-imprimir-estoque" class="btn btn-outline-dark fw-bold px-4">
+                                <i class="bi bi-printer me-2"></i> Imprimir Estoque Atual
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <div id="controle-estoque" class="p-4">
+                        <div
+                            class="d-flex justify-content-between align-items-center mb-4 bg-white p-3 rounded-3 shadow-sm">
+                            <div>
+                                <span class="badge bg-primary mb-1">Distribuição e Obras</span>
+                                <h2 class="fw-bold m-0"><i class="bi bi-truck text-primary"></i> Controle de Estoque
+                                </h2>
+                                <p class="text-muted m-0 small">Monitore e transfira materiais diretamente para os
+                                    canteiros de obras</p>
+                            </div>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTransferencia">
+                                <i class="bi bi-arrow-left-right"></i> Transferir para Obra
+                            </button>
+                        </div>
+
+                        <div class="card border-0 shadow-sm rounded-3 p-3 mb-4">
+                            <div class="row g-3 align-items-center">
+                                <div class="col-md-4">
+                                    <label class="form-label small fw-bold text-muted mb-1">Filtrar por Canteiro de
+                                        Obra</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-white border-end-0"><i
+                                                class="bi bi-geo-alt text-primary"></i></span>
+                                        <select id="filtroUnidadeEstoque"
+                                            class="form-select border-start-0 ps-0 fw-bold">
+                                            <option value="todas">Todas as Obras (Visão Consolidada)</option>
+                                            <option value="1">Residencial Jardins (Torre A)</option>
+                                            <option value="2">Comercial Centro (Galpão 02)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <label class="form-label small fw-bold text-muted mb-1">Pesquisar Insumo</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-white border-end-0"><i
+                                                class="bi bi-search text-muted"></i></span>
+                                        <input type="text" id="buscaEstoque" class="form-control border-start-0 ps-0"
+                                            placeholder="Digite o nome do material ou código...">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 d-flex align-items-end h-100">
+                                    <div class="text-end w-100">
+                                        <span class="text-muted small">Total Localizado: </span>
+                                        <span class="fw-bold text-dark" id="qtdFiltrada">5 materiais</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle mb-0">
+                                    <thead class="table-light text-uppercase fs-7">
+                                        <tr>
+                                            <th class="ps-3">Obra Destino</th>
+                                            <th>Material</th>
+                                            <th>Marca</th>
+                                            <th>Qtd. na Obra</th>
+                                            <th>Estoque Mínimo (Local)</th>
+                                            <th>Status Local</th>
+                                            <th class="text-center">Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tabelaEstoqueBody">
+                                        <tr>
+                                            <td class="ps-3">
+                                                <span class="fw-bold text-dark">Residencial Jardins</span>
+                                                <div class="text-muted small">ID Obra: 001</div>
+                                            </td>
+                                            <td>Cimento Portland</td>
+                                            <td>Votorantim</td>
+                                            <td class="fw-bold text-success">450 <span
+                                                    class="text-muted fw-normal">sc</span></td>
+                                            <td>50</td>
+                                            <td><span
+                                                    class="badge rounded-pill bg-success bg-opacity-10 text-success px-3">Abastecido</span>
+                                            </td>
+                                            <td class="text-center">
+                                                <button class="btn btn-sm btn-outline-primary"
+                                                    title="Solicitar Reposição">
+                                                    <i class="bi bi-cart-plus"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ps-3">
+                                                <span class="fw-bold text-dark">Comercial Centro</span>
+                                                <div class="text-muted small">ID Obra: 002</div>
+                                            </td>
+                                            <td>Tijolo Cerâmico</td>
+                                            <td>Cerâmica São João</td>
+                                            <td class="fw-bold text-warning">800 <span
+                                                    class="text-muted fw-normal">un</span></td>
+                                            <td>500</td>
+                                            <td><span
+                                                    class="badge rounded-pill bg-warning bg-opacity-10 text-warning px-3">Atenção</span>
+                                            </td>
+                                            <td class="text-center">
+                                                <button class="btn btn-sm btn-outline-primary"
+                                                    title="Solicitar Reposição">
+                                                    <i class="bi bi-cart-plus"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- ============================================================
+                                        PAINEL: PAINEL DE PEDIDOS
+                    ============================================================ -->
+                    <div id="pedidos" class="p-4">
+                        <!-- conteúdo de pedidos -->
+                    </div>
+
+
+
+                    <!-- ============================================================
+                                        PAINEL: RELATÓRIOS 
+                    ============================================================ -->
+                    <div id="relatorios" class="p-4">
+                        <!-- conteúdo de relatórios -->
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+    <script src="../../core/utils/nav.js"></script>
+    <script type="module" src="render.js"></script>
+    <script src="../../public/login.js"></script>
+</body>
+
+</html>

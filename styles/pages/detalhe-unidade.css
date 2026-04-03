@@ -1,0 +1,84 @@
+/* ============================================================
+   ESTILOS EXCLUSIVOS: TELA DETALHE DA UNIDADE
+   Focado em: Scroll Interno e Layout que não quebra
+   ============================================================ */
+
+/* 1. Layout da Coluna Direita (Sidebar Sticky) */
+#tela-detalhe-unidade .col-lg-4 {
+    /* Altura total da tela menos margens para não cortar embaixo */
+    height: calc(100vh - 100px); 
+    position: sticky;
+    top: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 2. Container de Ocorrências (O segredo do Scroll) */
+.card-ocorrencias-wrapper {
+    flex: 1; /* Faz o card esticar até o fim da coluna */
+    min-height: 0; /* Essencial: Impede que o flex vaze a tela */
+    display: flex;
+    flex-direction: column;
+}
+
+#lista-ocorrencias {
+    overflow-y: auto; 
+    flex-grow: 1; /* Ocupa o espaço interno do card */
+    padding-right: 5px;
+}
+
+/* 3. Área de Materiais (Altura fixa) */
+.scroll-container-materiais {
+    height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* 4. Tabela de Equipe (Scroll interno) */
+.table-responsive-equipe {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+/* Fixa o cabeçalho da tabela ao rolar */
+.table-responsive-equipe thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #f8f9fa !important;
+    /* Box shadow sutil para separar o cabeçalho ao rolar */
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05); 
+}
+
+/* 5. Cards de Materiais */
+.material-item-card {
+    min-height: 60px;
+    background: #f8f9fa;
+    border: 1px solid #edf2f7;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 4px;
+}
+
+/* 6. Scrollbar Customizado */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* 7. Reuso de Status */
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}

@@ -4,16 +4,21 @@
    Classes do Bootstrap NÃO devem vir aqui.
    ============================================= */
 
+:root {
+    /* Variáveis de cor para os cards modernos */
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f3f4f6;
+    --color-border-tertiary: #e5e7eb;
+    --color-text-secondary: #6b7280;
+    --border-radius-lg: 12px;
+}
+
 * {
     font-family: 'Inter', sans-serif;
     -webkit-user-select: none;
-    /* Chrome, Safari */
     -moz-user-select: none;
-    /* Firefox */
     -ms-user-select: none;
-    /* IE/Edge antigo */
     user-select: none;
-    /* padrão */
 }
 
 body {
@@ -271,22 +276,121 @@ body {
 /* ===== BADGES PARA SOLICITAÇÃO DE MATERIAIS ===== */
 /* Reutiliza a classe base .status-badge criada anteriormente */
 
-.status-pendente {
-    background-color: #fef3c7; /* Amarelo clarinho */
-    color: #b45309;
-}
-
-.status-aprovada {
-    background-color: #e0e7ff; /* Azul/Indigo clarinho */
-    color: #4338ca;
-}
-
-.status-entregue {
-    background-color: #dcfce3; /* Verde clarinho */
-    color: #15803d;
-}
-
 .status-recusada {
     background-color: #fee2e2; /* Vermelho clarinho */
     color: #b91c1c;
+}
+
+/* ===== GRID E CARDS DE CONSTRUÇÃO MODERNOS ===== */
+
+.modern-grid {
+    display: grid;
+    /* Cria colunas responsivas: 1 no mobile, até 3 no desktop */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+    margin-bottom: 2rem;
+}
+
+.modern-card {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 1.25rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.modern-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.modern-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.modern-card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+}
+
+.modern-card-badge {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 999px;
+}
+
+.modern-card-subtitle {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    margin: 0 0 12px;
+}
+
+.modern-card-stats {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.modern-progress-bg {
+    height: 6px;
+    background: var(--color-background-secondary);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.modern-progress-bar {
+    height: 100%;
+    border-radius: 999px;
+    transition: width 0.5s ease-in-out;
+}
+
+/* Scrollbars elegantes */
+#container-materiais::-webkit-scrollbar,
+#lista-ocorrencias::-webkit-scrollbar {
+    width: 6px;
+}
+#container-materiais::-webkit-scrollbar-thumb,
+#lista-ocorrencias::-webkit-scrollbar-thumb {
+    background-color: #e5e7eb;
+    border-radius: 10px;
+}
+
+/* Card de material compacto para não quebrar */
+.material-item-card {
+    background: #f9fafb;
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #f3f4f6;
+}
+
+/* Scrollbar moderno para as listas internas */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 5px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+
+/* Fixar o topo da tabela de equipe ao scrollar */
+.sticky-top {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: white !important;
 }
