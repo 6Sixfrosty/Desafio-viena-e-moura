@@ -1,5 +1,5 @@
 // (API)
-export const API_BASE_URL = 'construtech-api-production.up.railway.app';  
+export const API_BASE_URL = 'https://construtech-api-production.up.railway.app/';  
 
 export const FETCH_OPTIONS = {
     headers: {
