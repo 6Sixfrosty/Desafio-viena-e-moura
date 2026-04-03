@@ -1,12 +1,12 @@
 import { AlmoxarifeAPI } from '../../core/api/almoxarife.js';
 
-const btn_imprimirEstoque = document.getElementById('btn-imprimir-estoque');
+
 async function ImprimirEstoque() {
     try {
         const dados = await AlmoxarifeAPI.getPressEstoque();
-        console.log("Dados que chegaram no Front:", dados);
+        console.log("Dados de impressão", dados)
     } catch (error) {
-        console.error('ERROR in ImprimirEstoque(): ', error);
+        console.error('Erro no teste:', error);
     }
 }
 
@@ -69,7 +69,12 @@ async function renderizarArmazem() {
 document.addEventListener('DOMContentLoaded', renderizarArmazem);
 
 document.addEventListener('click', function(event) {
-    if(event.target === btn_imprimirEstoque){
-        ImprimirEstoque()
+
+    const botao = event.target.closest('#btn-imprimir-estoque');
+
+    // 2. Se o clique foi no botão (ou em algo dentro dele)
+    if (botao) {
+        console.log("Botão detectado!");
+        ImprimirEstoque();
     }
-})
+});
