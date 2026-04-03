@@ -3,7 +3,7 @@ import { API_BASE_URL, FETCH_OPTIONS } from './config.js';
 export const AlmoxarifeAPI = {
     getArmazem: async () => {
         try {
-            const res = await fetch(`${API_BASE_URL}/armazem/armazemCentral`, {
+            const res = await fetch(`${API_BASE_URL}armazem/armazemCentral`, {
                 ...FETCH_OPTIONS,
                 method: 'GET'
             });
