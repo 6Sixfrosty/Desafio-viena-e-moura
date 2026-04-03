@@ -1,11 +1,16 @@
 import { AlmoxarifeAPI } from '../../core/api/almoxarife.js';
 
+const btn_imprimirEstoque = document.getElementById('btn-imprimir-estoque');
+async function ImprimirEstoque() {
+        const dados = await AlmoxarifeAPI.getPressEstoque();
+        console.log("Dados que chegaram no Front:", dados);
+}
+
 async function renderizarArmazem() {
     try {
         const dados = await AlmoxarifeAPI.getArmazem();
-        console.log("Dados que chegaram no Front:", dados);
 
-        
+
         const gridHtmlIDs = ['endpoint-total-materiais', 'endpoint-estoque-critico'];
         const gridInner = [dados[0].totalGeral, dados[0].totalAbaixoMinimo];
 
@@ -59,4 +64,8 @@ async function renderizarArmazem() {
 }
 document.addEventListener('DOMContentLoaded', renderizarArmazem);
 
-
+document.addEventListener('click', function(event) {
+    if(event.target === btn_imprimirEstoque){
+        ImprimirEstoque()
+    }
+})
