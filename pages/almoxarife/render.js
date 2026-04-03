@@ -2,8 +2,12 @@ import { AlmoxarifeAPI } from '../../core/api/almoxarife.js';
 
 const btn_imprimirEstoque = document.getElementById('btn-imprimir-estoque');
 async function ImprimirEstoque() {
+    try {
         const dados = await AlmoxarifeAPI.getPressEstoque();
         console.log("Dados que chegaram no Front:", dados);
+    } catch (error) {
+        console.error('ERROR in ImprimirEstoque(): ', error);
+    }
 }
 
 async function renderizarArmazem() {
