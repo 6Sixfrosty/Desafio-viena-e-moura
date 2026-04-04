@@ -1,0 +1,42 @@
+/* Customizações para o Painel de Pedidos (Estilo Complementar ao Bootstrap) */
+
+#painel-pedidos .card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+#painel-pedidos .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(12, 24, 44, 0.08) !important;
+}
+
+#painel-pedidos .table-hover tbody tr {
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+#painel-pedidos .table-hover tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+#painel-pedidos .btn-light {
+    background-color: #f3f4f6;
+    border: none;
+    transition: all 0.2s;
+}
+
+#painel-pedidos .btn-light:hover {
+    background-color: #e2e8f0;
+    transform: scale(1.05);
+}
+
+/* Customização da barra de rolagem da tabela para não quebrar o layout */
+#painel-pedidos .table-responsive::-webkit-scrollbar {
+    height: 8px;
+}
+#painel-pedidos .table-responsive::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 10px;
+}
+#painel-pedidos .table-responsive::-webkit-scrollbar-track {
+    background-color: #f8fafc;
+}
