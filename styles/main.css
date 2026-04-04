@@ -115,49 +115,40 @@ body {
 
 /* ===== SISTEMA PRINCIPAL (Usado em pages/home/index.html) ===== */
 
-/* ALTERAÇÃO AQUI: Como as telas estão separadas, o container principal 
-   não deve mais ficar invisível por padrão. */
-.system-container {
-    display: block;
+#systemScreen main {
+    background-color: #f8fafc; /* Um cinza muito claro, padrão de sistemas modernos */
 }
 
-.sidebar {
-    background: linear-gradient(180deg, #1e2a3a 0%, #0f1a24 100%);
-    min-height: 100vh;
-    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.08);
+/* Estilização dos Links do Menu */
+.navbar .menu-link {
+    color: #64748b; /* Cor discreta para links inativos */
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s ease-in-out;
 }
 
-.sidebar .nav-link {
-    color: #cddce9;
-    padding: 12px 20px;
-    margin: 8px 12px;
-    border-radius: 14px;
-    font-weight: 500;
-    transition: all 0.2s;
-    cursor: pointer;
-
+/* Efeito Hover nos links do Menu */
+.navbar .menu-link:hover {
+    color: #0f172a;
+    background-color: #f1f5f9;
 }
 
-.sidebar .nav-link:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
+/* Estilo do Menu ATIVO (A página que o usuário está agora) */
+.navbar .menu-link.active {
+    color: #0ea5e9 !important; /* Cor de destaque (Azul) para a aba atual */
+    background-color: rgba(14, 165, 233, 0.1); /* Fundo azul bem clarinho */
 }
 
-.sidebar .nav-link.active {
-    background: #f97316;
-    color: white;
-    box-shadow: 0 4px 10px rgba(249, 115, 22, 0.3);
-}
-
-.sidebar .nav-link i {
-    margin-right: 12px;
-    font-size: 1.2rem;
-}
-
-.main-content {
-    padding: 1.5rem 2rem;
-    background: #f4f7fc;
-    min-height: 100vh;
+/* Responsividade: Ajustes para Celular (Abaixo de 992px) */
+@media (max-width: 991.98px) {
+    .navbar .border-lg-0 {
+        border: none !important;
+    }
+    .navbar .menu-link {
+        font-size: 1rem;
+        padding-top: 0.75rem !important;
+        padding-bottom: 0.75rem !important;
+    }
 }
 
 /* ===== CARDS E COMPONENTES (Usados nas páginas internas) ===== */
