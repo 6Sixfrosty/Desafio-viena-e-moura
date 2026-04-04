@@ -119,24 +119,49 @@ body {
     background-color: #f8fafc; /* Um cinza muito claro, padrão de sistemas modernos */
 }
 
-/* Estilização dos Links do Menu */
+/* =============================================
+   ESTILIZAÇÃO DA NAVBAR (DARK THEME)
+   ============================================= */
+
+/* Links inativos */
 .navbar .menu-link {
-    color: #64748b; /* Cor discreta para links inativos */
-    font-weight: 600;
+    color: #94a3b8; /* Cinza claro suave para combinar com fundo escuro */
+    font-weight: 500;
     font-size: 0.9rem;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.navbar .menu-link i {
+    color: #64748b; /* Ícones um pouco mais escuros que o texto */
+    transition: all 0.3s ease-in-out;
 }
 
 /* Efeito Hover nos links do Menu */
 .navbar .menu-link:hover {
-    color: #0f172a;
-    background-color: #f1f5f9;
+    color: #f8fafc;
+    background-color: rgba(255, 255, 255, 0.05); /* Fundo branco bem transparente */
+    transform: translateY(-1px);
 }
 
-/* Estilo do Menu ATIVO (A página que o usuário está agora) */
+.navbar .menu-link:hover i {
+    color: #f8fafc;
+}
+
+/* Estilo do Menu ATIVO (A aba atual) */
 .navbar .menu-link.active {
-    color: #0ea5e9 !important; /* Cor de destaque (Azul) para a aba atual */
-    background-color: rgba(14, 165, 233, 0.1); /* Fundo azul bem clarinho */
+    color: #ffffff !important;
+    background-color: rgba(249, 115, 22, 0.1); /* Laranja da marca translúcido */
+    border: 1px solid rgba(249, 115, 22, 0.2);
+}
+
+.navbar .menu-link.active i {
+    color: #f97316 !important; /* Ícone na cor laranja da sua marca */
+}
+
+/* Hover no botão de sair */
+#logoutBtn:hover {
+    background-color: rgba(239, 68, 68, 0.2) !important;
+    color: #f87171 !important;
 }
 
 /* Responsividade: Ajustes para Celular (Abaixo de 992px) */
@@ -146,8 +171,8 @@ body {
     }
     .navbar .menu-link {
         font-size: 1rem;
-        padding-top: 0.75rem !important;
-        padding-bottom: 0.75rem !important;
+        padding: 0.75rem 1rem !important;
+        margin-bottom: 4px;
     }
 }
 
