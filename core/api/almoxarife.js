@@ -17,9 +17,11 @@ const request = async (endpoint, method, body = null) => {
     }
 };
 
-
 export const AlmoxarifeAPI = {
     getArmazem: () => request('almoxarife/armazem', 'GET'),
     getPressEstoque: () => request('almoxarife/PressEstoque', 'GET'),
     getPedidos: () => request('almoxarife/pedidos', 'GET'),
+    
+    
+    postPdfEmail: (dadosParaEnvio) => request('SendEmail/send', 'POST', dadosParaEnvio)
 };

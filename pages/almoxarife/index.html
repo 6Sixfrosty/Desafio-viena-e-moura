@@ -244,98 +244,198 @@
                     </div>
 
 
+
+                    <!-- ============================================================
+                                         PAINEL: CONTROLE DE ESTOQUE
+                    ============================================================ -->
                     <div id="controle-estoque" class="p-4">
-                        <div class="card border-0 shadow-sm rounded-3 p-3 mb-4">
-                            <div class="row g-3 align-items-center">
-                                <div class="col-md-4">
-                                    <label class="form-label small fw-bold text-muted mb-1">Filtrar por Canteiro de
-                                        Obra</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-white border-end-0"><i
-                                                class="bi bi-geo-alt text-primary"></i></span>
-                                        <select id="filtroUnidadeEstoque"
-                                            class="form-select border-start-0 ps-0 fw-bold">
-                                            <option value="todas">Todas as Obras (Visão Consolidada)</option>
-                                            <option value="1">Residencial Jardins (Torre A)</option>
-                                            <option value="2">Comercial Centro (Galpão 02)</option>
-                                        </select>
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div>
+                                <h2 class="h3 fw-bold text-dark mb-1">Dashboard de Movimentações</h2>
+                                <p class="text-muted mb-0">Gestão de fluxo de insumos - Canteiro Digital</p>
+                            </div>
+                            <button id="btnExportarPDF" class="btn btn-primary-custom d-flex align-items-center gap-2"
+                                data-bs-toggle="modal" data-bs-target="#modalExportar">
+                                <i class="bi bi-file-earmark-pdf"></i>
+                                Exportar PDF
+                            </button>
+                        </div>
+
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-3 mb-4">
+                            <div class="col">
+                                <div class="card card-dashboard h-100 border-0 shadow-sm p-3">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <div class="text-success bg-success bg-opacity-10 rounded-3 p-2 d-flex align-items-center justify-content-center"
+                                            style="width: 40px; height: 40px;">
+                                            <i class="bi bi-arrow-down-left-circle fs-5"></i>
+                                        </div>
+                                        <span id="trendEntradas"
+                                            class="badge rounded-pill status-aprovada text-success fw-bold"
+                                            style="font-size: 0.75rem;">
+                                            +12.5%
+                                        </span>
                                     </div>
+                                    <p class="text-muted mb-1" style="font-size: 0.85rem; font-weight: 500;">Total de
+                                        Entradas</p>
+                                    <h3 id="kpiEntradas" class="fw-bold text-dark mb-0">1.248</h3>
                                 </div>
-                                <div class="col-md-5">
-                                    <label class="form-label small fw-bold text-muted mb-1">Pesquisar Insumo</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-white border-end-0"><i
-                                                class="bi bi-search text-muted"></i></span>
-                                        <input type="text" id="buscaEstoque" class="form-control border-start-0 ps-0"
-                                            placeholder="Digite o nome do material ou código...">
+                            </div>
+
+                            <div class="col">
+                                <div class="card card-dashboard h-100 border-0 shadow-sm p-3">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <div class="text-danger bg-danger bg-opacity-10 rounded-3 p-2 d-flex align-items-center justify-content-center"
+                                            style="width: 40px; height: 40px;">
+                                            <i class="bi bi-arrow-up-right-circle fs-5"></i>
+                                        </div>
+                                        <span id="trendSaidas"
+                                            class="badge rounded-pill status-pendente text-danger fw-bold"
+                                            style="font-size: 0.75rem;">
+                                            +8.2%
+                                        </span>
                                     </div>
+                                    <p class="text-muted mb-1" style="font-size: 0.85rem; font-weight: 500;">Total de
+                                        Saídas</p>
+                                    <h3 id="kpiSaidas" class="fw-bold text-dark mb-0">892</h3>
                                 </div>
-                                <div class="col-md-3 d-flex align-items-end h-100">
-                                    <div class="text-end w-100">
-                                        <span class="text-muted small">Total Localizado: </span>
-                                        <span class="fw-bold text-dark" id="qtdFiltrada">5 materiais</span>
+                            </div>
+
+                            <div class="col">
+                                <div class="card card-dashboard h-100 border-0 shadow-sm p-3">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <div class="text-primary bg-primary bg-opacity-10 rounded-3 p-2 d-flex align-items-center justify-content-center"
+                                            style="width: 40px; height: 40px;">
+                                            <i class="bi bi-box-seam fs-5"></i>
+                                        </div>
+                                        <span id="trendEstoque"
+                                            class="badge rounded-pill bg-light text-muted border fw-bold"
+                                            style="font-size: 0.75rem;">
+                                            -3.1%
+                                        </span>
                                     </div>
+                                    <p class="text-muted mb-1" style="font-size: 0.85rem; font-weight: 500;">Estoque
+                                        Atual</p>
+                                    <h3 id="kpiEstoque" class="fw-bold text-dark mb-0">3.567</h3>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div
+                                    class="card card-dashboard h-100 border-0 shadow-sm p-3 border-start border-warning border-4">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <div class="text-warning bg-warning bg-opacity-10 rounded-3 p-2 d-flex align-items-center justify-content-center"
+                                            style="width: 40px; height: 40px;">
+                                            <i class="bi bi-clock-history fs-5"></i>
+                                        </div>
+                                        <span id="trendPendentes"
+                                            class="badge rounded-pill status-aprovada text-success fw-bold"
+                                            style="font-size: 0.75rem;">
+                                            +15.3%
+                                        </span>
+                                    </div>
+                                    <p class="text-muted mb-1" style="font-size: 0.85rem; font-weight: 500;">Pedidos
+                                        Pendentes</p>
+                                    <h3 id="kpiPendentes" class="fw-bold text-dark mb-0">24</h3>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
-                            <div class="table-responsive">
-                                <table class="table table-hover align-middle mb-0">
-                                    <thead class="table-light text-uppercase fs-7">
+                        <div class="card card-dashboard border-0 shadow-sm p-3 mb-3 bg-white">
+                            <div class="row g-3 align-items-end">
+                                <div class="col-12 col-md-3">
+                                    <label for="filtroDataInicio" class="form-label text-muted fw-semibold"
+                                        style="font-size: 0.8rem;">Data Início</label>
+                                    <input type="date" id="filtroDataInicio"
+                                        class="form-control form-control-sm rounded-2">
+                                </div>
+                                <div class="col-12 col-md-3">
+                                    <label for="filtroDataFim" class="form-label text-muted fw-semibold"
+                                        style="font-size: 0.8rem;">Data Fim</label>
+                                    <input type="date" id="filtroDataFim"
+                                        class="form-control form-control-sm rounded-2">
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <label for="filtroTipo" class="form-label text-muted fw-semibold"
+                                        style="font-size: 0.8rem;">Tipo de Movimentação</label>
+                                    <select id="filtroTipo" class="form-select form-select-sm rounded-2">
+                                        <option value="todos">Todos</option>
+                                        <option value="entrada">Entradas</option>
+                                        <option value="saida">Saídas</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 col-md-2 d-grid">
+                                    <button id="btnAplicarFiltros" class="btn btn-sm btn-outline-secondary rounded-2">
+                                        <i class="bi bi-filter me-1"></i>Filtrar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card card-dashboard border-0 shadow-sm bg-white overflow-hidden">
+                            <div class="table-responsive custom-scrollbar">
+                                <table class="table table-hover table-striped align-middle custom-table mb-0">
+                                    <thead class="table-light text-uppercase" style="font-size: 0.75rem;">
                                         <tr>
-                                            <th class="ps-3">Obra Destino</th>
-                                            <th>Material</th>
-                                            <th>Marca</th>
-                                            <th>Qtd. na Obra</th>
-                                            <th>Estoque Mínimo (Local)</th>
-                                            <th>Status Local</th>
-                                            <th class="text-center">Ações</th>
+                                            <th class="px-4 py-3" style="width: 120px;">Data</th>
+                                            <th class="py-3">Material</th>
+                                            <th class="py-3 text-center">Quantidade</th>
+                                            <th class="py-3">Tipo</th>
+                                            <th class="py-3">Origem/Destino (Ação)</th>
+                                            <th class="py-3 px-4">Status</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="tabelaEstoqueBody">
+                                    <tbody id="tabelaMovimentacoesBody" class="fw-medium" style="font-size: 0.9rem;">
+
                                         <tr>
-                                            <td class="ps-3">
-                                                <span class="fw-bold text-dark">Residencial Jardins</span>
-                                                <div class="text-muted small">ID Obra: 001</div>
+                                            <td class="px-4 text-muted">15/10/2023</td>
+                                            <td class="text-dark fw-bold">Cimento CP II Aratu</td>
+                                            <td class="text-center">200 SC</td>
+                                            <td>
+                                                <span
+                                                    class="badge status-badge status-aprovada bg-opacity-10 rounded-pill">ENTRADA</span>
                                             </td>
-                                            <td>Cimento Portland</td>
-                                            <td>Votorantim</td>
-                                            <td class="fw-bold text-success">450 <span
-                                                    class="text-muted fw-normal">sc</span></td>
-                                            <td>50</td>
-                                            <td><span
-                                                    class="badge rounded-pill bg-success bg-opacity-10 text-success px-3">Abastecido</span>
+                                            <td class="text-secondary">
+                                                <i class="bi bi-truck me-2 text-muted"></i>LafargeHolcim Brasil
                                             </td>
-                                            <td class="text-center">
-                                                <button class="btn btn-sm btn-outline-primary"
-                                                    title="Solicitar Reposição">
-                                                    <i class="bi bi-cart-plus"></i>
-                                                </button>
+                                            <td class="px-4">
+                                                <span class="badge rounded-pill status-entregue">Concluído</span>
                                             </td>
                                         </tr>
+
                                         <tr>
-                                            <td class="ps-3">
-                                                <span class="fw-bold text-dark">Comercial Centro</span>
-                                                <div class="text-muted small">ID Obra: 002</div>
+                                            <td class="px-4 text-muted">14/10/2023</td>
+                                            <td class="text-dark fw-bold">Aço CA-50 10mm</td>
+                                            <td class="text-center">1.500 KG</td>
+                                            <td>
+                                                <span
+                                                    class="badge status-badge status-pendente bg-opacity-10 rounded-pill">SAÍDA</span>
                                             </td>
-                                            <td>Tijolo Cerâmico</td>
-                                            <td>Cerâmica São João</td>
-                                            <td class="fw-bold text-warning">800 <span
-                                                    class="text-muted fw-normal">un</span></td>
-                                            <td>500</td>
-                                            <td><span
-                                                    class="badge rounded-pill bg-warning bg-opacity-10 text-warning px-3">Atenção</span>
+                                            <td>
+                                                <div class="d-flex align-items-center gap-1">
+                                                    <span class="badge bg-primary rounded-pill fw-bold"
+                                                        style="font-size: 0.7rem; padding: 3px 8px;">#854</span>
+                                                    <span class="text-secondary">(Torre A - 12º Andar)</span>
+                                                </div>
                                             </td>
-                                            <td class="text-center">
-                                                <button class="btn btn-sm btn-outline-primary"
-                                                    title="Solicitar Reposição">
-                                                    <i class="bi bi-cart-plus"></i>
-                                                </button>
+                                            <td class="px-4">
+                                                <span class="badge rounded-pill status-aprovada text-success"
+                                                    style="background-color: #e3f7ec;">Em Trânsito</span>
                                             </td>
                                         </tr>
+
                                     </tbody>
                                 </table>
+                            </div>
+
+                            <div
+                                class="d-flex justify-content-between align-items-center p-3 border-top border-light pagination-container">
+                                <span class="text-muted" style="font-size: 0.8rem;">Mostrando 2 de 120 registros</span>
+                                <div class="d-flex gap-1">
+                                    <button class="btn btn-sm btn-light border" disabled><i
+                                            class="bi bi-chevron-left"></i></button>
+                                    <button class="btn btn-sm btn-light border"><i
+                                            class="bi bi-chevron-right"></i></button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -513,13 +613,91 @@
 
 
         </div>
+
+        <div class="modal fade" id="modalExportar" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 shadow-lg" style="border-radius: 20px;">
+                    <div class="modal-header border-0 pb-0">
+                        <h5 class="fw-bold text-dark mt-2 px-2">Exportar Relatório</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <p class="text-muted small px-2 mb-4">Escolha como deseja receber o relatório de movimentações
+                            filtrado.</p>
+
+                        <div class="d-flex flex-column gap-3">
+                            <label class="export-option p-3 border rounded-3 d-flex align-items-center cursor-pointer"
+                                for="optDownload">
+                                <input class="form-check-input me-3" type="radio" name="exportType" id="optDownload"
+                                    value="download" checked>
+                                <div class="d-flex align-items-center gap-3">
+                                    <i class="bi bi-file-earmark-pdf fs-3 text-danger"></i>
+                                    <div>
+                                        <span class="d-block fw-bold text-dark">Baixar Agora</span>
+                                        <small class="text-muted">Gera o PDF e inicia o download direto.</small>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="export-option p-3 border rounded-3 d-flex align-items-center cursor-pointer"
+                                for="optEmail">
+                                <input class="form-check-input me-3" type="radio" name="exportType" id="optEmail"
+                                    value="email">
+                                <div class="d-flex align-items-center gap-3">
+                                    <i class="bi bi-envelope fs-3 text-primary"></i>
+                                    <div>
+                                        <span class="d-block fw-bold text-dark">Enviar por E-mail</span>
+                                        <small class="text-muted">Envia o documento para sua caixa de entrada.</small>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div id="containerEmailExport" class="mt-4 d-none">
+                            <label class="form-label text-dark fw-semibold small">Insira seu e-mail abaixo</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0"><i
+                                        class="bi bi-at text-muted"></i></span>
+                                <input type="email" id="emailDestino" class="form-control border-start-0"
+                                    placeholder="exemplo@empresa.com">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-0 pt-0 p-4">
+                        <button type="button" class="btn btn-light fw-bold px-4"
+                            data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" id="btnConfirmarExport"
+                            class="btn btn-primary-custom px-4">Confirmar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .export-option {
+                transition: all 0.2s;
+                cursor: pointer;
+            }
+
+            .export-option:hover {
+                background-color: #f8fafc;
+                border-color: #f97316 !important;
+            }
+
+            .form-check-input:checked+div {
+                color: #f97316;
+            }
+        </style>
     </div>
 
-    </div>
-    </div>
-    </div>
     <script src="../../core/utils/nav.js"></script>
-    <script type="module" src="render.js"></script>
+    <script type="module" src="js/render.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
+    <script type="module" src="js/acoes-estoque.js"></script>
     <script src="../../public/login.js"></script>
 
 </body>
