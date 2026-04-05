@@ -14,5 +14,5 @@ function login(credential) {
     }
 }
 function sair() {
-    window.location.href = '../../public/login.html';
+    window.location.href = '../../public/index.html';
 }
