@@ -1,35 +1,89 @@
-import { AlmoxarifeAPI } from '../../core/api/almoxarife.js';
+﻿import { AlmoxarifeAPI } from '../../../core/api/almoxarife.js';
 
 /* ====================================================================================================
                                             SQL & RENDER
 ==================================================================================================== */
 
 // Função Central de Inicialização
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     console.log("Sistema Inicializado");
 
-    // 1. Renderiza APENAS a página principal (ex: Armazém)
-    renderizarArmazem();
-
-    // 2. Configura a navegação (renderização sob demanda)
+    // 1. Configura a navegação
     configurarNavegacao();
+
+    // 2. Exibe apenas a página inicial e espera renderizar antes de carregar
+    await trocarPagina('armazem');
 });
 
+function esperarProximoFrame() {
+    return new Promise(resolve => requestAnimationFrame(resolve));
+}
+
+async function esperarRenderizacao() {
+    await esperarProximoFrame();
+    await esperarProximoFrame();
+}
+
+function ocultarTodasPaginas() {
+    const paginas = ['armazem', 'controle-estoque', 'painel-pedidos', 'relatorios'];
+
+    paginas.forEach(id => {
+        const elemento = document.getElementById(id);
+        if (elemento) {
+            elemento.style.display = 'none';
+        }
+    });
+}
+
+function mostrarPagina(page) {
+    ocultarTodasPaginas();
+
+    const pagina = document.getElementById(page);
+    if (pagina) {
+        pagina.style.display = 'block';
+    }
+}
+
+function marcarMenuAtivo(page) {
+    const navLinks = document.querySelectorAll('.menu-link');
+
+    navLinks.forEach(link => {
+        const paginaLink = link.getAttribute('data-page');
+        link.classList.toggle('active', paginaLink === page);
+    });
+}
+
+async function trocarPagina(page) {
+    mostrarPagina(page);
+    marcarMenuAtivo(page);
+
+    // Espera a tela ser renderizada antes de executar o render da página
+    await esperarRenderizacao();
+
+    switch (page) {
+        case 'armazem':
+            await renderizarArmazem();
+            break;
+        case 'controle-estoque':
+            await renderizarEstoque();
+            break;
+        case 'painel-pedidos':
+            await renderizarPedidos();
+            break;
+        case 'relatorios':
+            await renderizarEstoque();
+            break;
+    }
+}
 
 function configurarNavegacao() {
     const navLinks = document.querySelectorAll('.menu-link');
 
     navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
+        link.addEventListener('click', async (e) => {
             e.preventDefault();
             const page = link.getAttribute('data-page');
-
-            switch (page) {
-                case 'armazem': renderizarArmazem(); break;
-                case 'controle-estoque': renderizarEstoque(); break;
-                case 'painel-pedidos': renderizarPedidos(); break;
-                case 'relatorios': renderizarRelatorios(); break;
-            }
+            await trocarPagina(page);
         });
     });
 }
@@ -71,6 +125,7 @@ document.addEventListener('click', function (event) {
 /* ====================================================================================================
                                         RENDERS
 ==================================================================================================== */
+
 async function renderizarPedidos() {
 
     try {
@@ -223,6 +278,103 @@ async function renderizarArmazem() {
 }
 
 
+
+async function renderizarEstoque(filtros = {}) {
+    try {
+        const dados = await AlmoxarifeAPI.getControleEstoque(filtros);
+        const tbody = document.getElementById('tabelaMovimentacoesBody');
+
+        if (!Array.isArray(dados) || dados.length === 0) {
+            tbody.innerHTML =
+                `<tr><td colspan="6" class="text-center text-muted py-4">Nenhuma movimentacao encontrada.</td></tr>`;
+            return;
+        }
+
+        document.getElementById('kpiEntradas').textContent = dados[0].total_entradas ?? 0;
+        document.getElementById('kpiSaidas').textContent = dados[0].total_saidas ?? 0;
+        document.getElementById('kpiEstoque').textContent = dados[0].estoque_total ?? 0;
+        document.getElementById('kpiPendentes').textContent = dados[0].total_pendentes ?? 0;
+
+        document.getElementById('trendEntradas').textContent = '-';
+        document.getElementById('trendSaidas').textContent = '-';
+        document.getElementById('trendEstoque').textContent = '-';
+        document.getElementById('trendPendentes').textContent = '-';
+
+        const escapeHtml = (valor) => String(valor ?? '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+
+        const linhas = dados.map((item) => {
+            const tipoValor = String(item.tipo_movimentacao ?? item.tipo ?? '').toLowerCase();
+            const tipoDetectado = tipoValor.includes('entrada')
+                ? 'ENTRADA'
+                : tipoValor.includes('saida') || tipoValor.includes('saída')
+                    ? 'SAIDA'
+                    : Number(item.saldo_novo) >= Number(item.saldo_anterior)
+                        ? 'ENTRADA'
+                        : 'SAIDA';
+
+            const isEntrada = tipoDetectado === 'ENTRADA';
+            const tipoClasse = isEntrada ? 'status-aprovada' : 'status-pendente';
+            const tipoLabel = isEntrada ? 'ENTRADA' : 'SAÍDA';
+            const origemIcone = isEntrada ? 'bi-truck' : 'bi-box-arrow-up-right';
+
+            const dataMovimentacao = escapeHtml(item.data_movimentacao ?? item.data ?? '--/--/----');
+            const material = escapeHtml(item.material ?? item.nome_material ?? item.nome ?? '-');
+            const quantidade = escapeHtml(item.quantidade ?? item.qtd ?? 0);
+            const unidade = escapeHtml(item.unidade ?? item.unidade_medida ?? '');
+            const origemDestino = escapeHtml(
+                item.origem_destino ??
+                item.origemDestino ??
+                item.origem ??
+                item.destino ??
+                item.alteracao ??
+                '-'
+            );
+            const status = escapeHtml(item.status ?? 'Concluído');
+
+            return `
+                <tr>
+                    <td class="px-4 text-muted">${dataMovimentacao}</td>
+                    <td class="text-dark fw-bold">${material}</td>
+                    <td class="text-center">${quantidade} ${unidade}</td>
+                    <td>
+                        <span
+                            class="badge status-badge ${tipoClasse} bg-opacity-10 rounded-pill">${tipoLabel}</span>
+                    </td>
+                    <td class="text-secondary">
+                        <i class="bi ${origemIcone} me-2 text-muted"></i>${origemDestino}
+                    </td>
+                    <td class="px-4">
+                        <span class="badge rounded-pill status-entregue">${status}</span>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+
+        tbody.innerHTML = linhas;
+
+        const btnAplicarFiltros = document.getElementById('btnAplicarFiltros');
+        if (btnAplicarFiltros) {
+            btnAplicarFiltros.onclick = () => {
+                const filtros = {
+                    dataInicio: document.getElementById('filtroDataInicio').value,
+                    dataFim: document.getElementById('filtroDataFim').value,
+                    tipo: document.getElementById('filtroTipo').value
+                };
+                renderizarEstoque(filtros);
+            };
+        }
+
+    } catch (error) {
+        console.error('[renderizarEstoque]:', error.message);
+        document.getElementById('tabelaMovimentacoesBody').innerHTML =
+            `<tr><td colspan="6" class="text-center text-danger">Erro ao carregar movimentacoes.</td></tr>`;
+    }
+}
 
 /* ====================================================================================================
                                         MODALS

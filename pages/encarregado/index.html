@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
@@ -12,58 +12,100 @@
         href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="../../styles/main.css">
-    <link rel="stylesheet" href="../../styles/detalhe-unidade.css">
+    <link rel="stylesheet" href="../../shared/styles/main.css">
+    <link rel="stylesheet" href="./styles/unidades.css">
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
-    <div id="systemScreen" class="system-container">
+    <div id="systemScreen" class="system-container" style="display: block;">
         <div class="container-fluid p-0">
             <div class="row g-0">
 
-                <div class="col-md-3 col-lg-2 sidebar p-3 bg-dark d-flex flex-column" style="min-height: 100vh;">
-                    <div class="text-center mb-4 mt-2">
-                        <i class="bi bi-building fs-1 text-white-50"></i>
-                        <h5 class="text-white mt-2">Construtech</h5>
-                        <div class="user-info mt-3">
-                            <i class="bi bi-person-circle text-white-50 fs-4"></i><br>
-                            <span class="text-white fw-bold" id="userNameDisplay">Api</span><br>
-                            <small class="badge bg-secondary mt-1" id="userRoleDisplay">Gestor de Obras</small>
+                <nav class="navbar navbar-expand-lg shadow-sm sticky-top py-2"
+                    style="z-index: 1050; background-color: #1E293B !important; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                    <div class="container-fluid px-4">
+
+                        <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="#">
+                            <div class="text-white rounded-3 d-flex align-items-center justify-content-center shadow-sm"
+                                style="width: 38px; height: 38px; background: linear-gradient(135deg, #f97316 0%, #e05f0a 100%);">
+                                <i class="bi bi-building fs-5"></i>
+                            </div>
+                            <span class="fs-5 text-white tracking-tight">Construtec</span>
+                        </a>
+
+                        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarPrincipal">
+                            <i class="bi bi-list fs-1 text-white"></i>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarPrincipal">
+
+                            <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-1 gap-lg-2 mt-3 mt-lg-0" id="navMenu">
+                                <li class="nav-item">
+                                    <a class="nav-link menu-link active d-flex align-items-center gap-2 px-3 py-2 rounded-3"
+                                        data-page="checklist" href="#">
+                                        <i class="bi bi-clipboard-check fs-5"></i> <span>Checklist</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link menu-link d-flex align-items-center gap-2 px-3 py-2 rounded-3"
+                                        data-page="ocorrencias" href="#">
+                                        <i class="bi bi-exclamation-triangle fs-5"></i> <span>Ocorrências</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link menu-link d-flex align-items-center gap-2 px-3 py-2 rounded-3"
+                                        data-page="construcao" href="#">
+                                        <i class="bi bi-bricks fs-5"></i> <span>Unidades</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link menu-link d-flex align-items-center gap-2 px-3 py-2 rounded-3"
+                                        data-page="alocacao" href="#">
+                                        <i class="bi bi-people fs-5"></i> <span>Alocação</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link menu-link d-flex align-items-center gap-2 px-3 py-2 rounded-3"
+                                        data-page="relatorios" href="#">
+                                        <i class="bi bi-file-earmark-bar-graph fs-5"></i> <span>Relatórios</span>
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <div class="d-flex align-items-center gap-3 mt-3 mt-lg-0 pt-3 pt-lg-0">
+
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="rounded-circle d-flex align-items-center justify-content-center text-white"
+                                        style="width: 40px; height: 40px; background-color: rgba(255,255,255,0.1);">
+                                        <i class="bi bi-person-fill fs-5"></i>
+                                    </div>
+                                    <div class="d-flex flex-column lh-1">
+                                        <span class="fw-bold text-white" id="userNameDisplay"
+                                            style="font-size: 0.9rem;">getdaapi</span>
+                                        <span class="badge bg-white bg-opacity-10 text-light fw-normal mt-1"
+                                            id="userRoleDisplay"
+                                            style="font-size: 0.65rem; border: 1px solid rgba(255,255,255,0.1);">Mestre
+                                            de Obras</span>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-sm d-flex align-items-center gap-2 fw-semibold px-3 py-2"
+                                    id="logoutBtn" onclick="sair()"
+                                    style="background-color: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.2); transition: all 0.2s;">
+                                    <i class="bi bi-box-arrow-right fs-6"></i> <span
+                                        class="d-none d-lg-inline">Sair</span>
+                                </button>
+                            </div>
+
                         </div>
                     </div>
+                </nav>
 
-                    <nav class="nav flex-column flex-grow-1" id="navMenu">
-                        <a class="nav-link active" data-page="checklist">
-                            <i class="bi bi-clipboard-check"></i> Checklist Diário
-                        </a>
-                        <a class="nav-link" data-page="construcao">
-                            <i class="bi bi-clipboard-check"></i> Construção
-                        </a>
-                        <a class="nav-link" data-page="ocorrencias">
-                            <i class="bi bi-exclamation-triangle"></i> Ocorrências
-                        </a>
-                        <a class="nav-link" data-page="solicitar-materiais">
-                            <i class="bi bi-inbox"></i> Solicitar Materiais
-                        </a>
-                        <a class="nav-link" data-page="alocacao">
-                            <i class="bi bi-people"></i> Alocação de colaboradores
-                        </a>
-                        <a class="nav-link" data-page="relatorios">
-                            <i class="bi bi-file-earmark-bar-graph"></i> Relatórios Gerais
-                        </a>
-                    </nav>
-
-                    <hr class="bg-secondary mt-4 mb-3 border-secondary">
-                    <div class="mt-auto">
-                        <button class="btn btn-outline-light w-100" id="logoutBtn" onclick="sair()">
-                            <i class="bi bi-box-arrow-left"></i> Sair do Sistema
-                        </button>
-                    </div>
-                </div>
-
-                <div class="col-md-9 col-lg-10 bg-light" id="main-content">
+                <main class="container-fluid p-4" id="main-content"
+                    style="background-color: #f8fafc; min-height: calc(100vh - 65px);">
 
                     <!-- ============================================================
                          PAINEL: CHECKLIST OBRA
@@ -688,260 +730,728 @@
 
 
 
-                    <!-- ============================================================
-                         PAINEL: PAINEL DE PEDIDOS
-                         ID: #painel-pedidos | Oculto por padrão
-                         Controlado por: nav.js → Nav(elemento, 'painel-pedidos')
-                    ============================================================ -->
-                    <div id="solicitar-materiais" class="p-4">
-
-                        <div class="d-flex justify-content-between align-items-center mb-4">
-                            <div>
-                                <h3 class="fw-bold mb-0 text-dark"><i class="bi bi-cart-plus text-warning me-2"></i>
-                                    Solicitação de Materiais</h3>
-                                <p class="text-muted mb-0">Gerencie e realize novos pedidos de insumos para a obra.</p>
-                            </div>
-                            <button class="btn btn-primary-custom" data-bs-toggle="modal"
-                                data-bs-target="#novaSolicitacaoModal">
-                                <i class="bi bi-plus-lg"></i> Novo Pedido
-                            </button>
-                        </div>
-
-                        <div class="card-dashboard bg-white p-3 mb-4">
-                            <div class="row g-3">
-                                <div class="col-md-4">
-                                    <label class="form-label small text-muted">Filtrar por Status</label>
-                                    <select id="filtroStatusSolicitacao" class="form-select">
-                                        <option value="">Todos os Status</option>
-                                        <option value="PENDENTE">Pendentes</option>
-                                        <option value="APROVADA">Aprovadas</option>
-                                        <option value="RECUSADA">Recusadas</option>
-                                        <option value="ENTREGUE">Entregues</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="form-label small text-muted">Filtrar por Unidade</label>
-                                    <select id="filtroUnidadeSolicitacao" class="form-select">
-                                        <option value="">Todas as Unidades</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4 d-flex align-items-end">
-                                    <button class="btn btn-outline-secondary w-100" id="btnFiltrarSolicitacoes">
-                                        <i class="bi bi-funnel"></i> Aplicar Filtros
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card-dashboard bg-white p-4">
-                            <div class="table-responsive">
-                                <table class="table table-hover align-middle custom-table">
-                                    <thead class="table-light">
-                                        <tr>
-                                            <th>Nº Pedido</th>
-                                            <th>Data/Hora</th>
-                                            <th>Unidade Destino</th>
-                                            <th>Material Requisitado</th>
-                                            <th>Qtd</th>
-                                            <th>Status</th>
-                                            <th class="text-end">Ações</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="listaSolicitacoesBody">
-                                        <tr>
-                                            <td class="text-muted fw-semibold"># [ID_SOLICITACAO]</td>
-                                            <td>[DATA_HORA]</td>
-                                            <td>[NOME_DA_UNIDADE]</td>
-                                            <td>
-                                                <strong>[NOME_MATERIAL]</strong><br>
-                                                <small class="text-muted text-truncate d-inline-block"
-                                                    style="max-width: 200px;"
-                                                    title="[JUSTIFICATIVA]">[JUSTIFICATIVA]</small>
-                                            </td>
-                                            <td>[QUANTIDADE] [UNID_MEDIDA]</td>
-                                            <td>
-                                                <span class="badge status-badge status-pendente">[STATUS]</span>
-                                            </td>
-                                            <td class="text-end">
-                                                <button class="btn btn-sm btn-outline-danger" title="Cancelar Pedido">
-                                                    <i class="bi bi-x-circle"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal fade" id="novaSolicitacaoModal" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content card-dashboard">
-                                <div class="modal-header border-0 pb-0">
-                                    <h5 class="modal-title fw-bold"><i class="bi bi-cart text-warning"></i> Fazer Novo
-                                        Pedido</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form id="formNovaSolicitacao">
-
-                                        <div class="mb-3">
-                                            <label class="form-label">Unidade de Destino <span
-                                                    class="text-danger">*</span></label>
-                                            <select class="form-select" id="solicitacaoUnidade" required>
-                                                <option value="">Selecione a Unidade...</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label class="form-label">Material (Catálogo do Armazém) <span
-                                                    class="text-danger">*</span></label>
-                                            <select class="form-select" id="solicitacaoArmazem" required>
-                                                <option value="">Selecione o Material...</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <div class="col-md-6">
-                                                <label class="form-label">Quantidade <span
-                                                        class="text-danger">*</span></label>
-                                                <input type="number" class="form-control" id="solicitacaoQuantidade"
-                                                    min="1" required>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label class="form-label">Data do Registro</label>
-                                                <input type="text" class="form-control bg-light"
-                                                    id="solicitacaoDataHora" readonly>
-                                            </div>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label class="form-label">Justificativa da Necessidade <span
-                                                    class="text-danger">*</span></label>
-                                            <textarea class="form-control" id="solicitacaoJustificativa" rows="3"
-                                                placeholder="Ex: Necessário para a fase de concretagem da laje 2..."
-                                                required></textarea>
-                                        </div>
-
-                                    </form>
-                                </div>
-                                <div class="modal-footer border-0 pt-0">
-                                    <button type="button" class="btn btn-light rounded-pill px-4"
-                                        data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-primary-custom px-4" id="btnSalvarSolicitacao">
-                                        <i class="bi bi-send-check"></i> Enviar Pedido
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
 
 
                     <!-- ============================================================
-                         PAINEL: CONSTRUÇÂO
-                         ID: #alocacao | Oculto por padrão
-                         Controlado por: nav.js → Nav(elemento, 'alocacao')
+                         PAINEL: CONSTRUÇÃO
+                         ID: #construcao | Oculto por padrão
+                         Controlado por: nav.js → Nav(elemento, 'construcao')
                     ============================================================ -->
                     <div id="construcao" class="p-4">
-                        <div id="tela-grid-casas" class="p-4">
-                            <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
-                                <div>
-                                    <h2 class="fw-bold"><i class="bi bi-bricks text-danger"></i> Unidades da Obra</h2>
-                                    <p class="text-muted mb-0">Visão geral e progresso dos blocos/casas</p>
-                                </div>
-
-                                <div class="d-flex" style="min-width: 280px;">
-                                    <div
-                                        class="input-group input-group-sm shadow-sm rounded-pill overflow-hidden border">
-                                        <span class="input-group-text bg-white border-0 text-muted px-3">
-                                            <i class="bi bi-search"></i>
-                                        </span>
-                                        <input type="text" id="inputBuscaCasas"
-                                            class="form-control border-0 shadow-none bg-white"
-                                            placeholder="Buscar unidade, fase ou local...">
+                        <div class="unidades-module" id="unidadesModule">
+                            <!-- =========================================
+             TELA: GRID DE UNIDADES
+        ========================================== -->
+                            <section id="unidadesGridScreen" class="unidades-screen">
+                                <div class="d-flex justify-content-between align-items-start flex-wrap gap-3 mb-4">
+                                    <div>
+                                        <h2 class="fw-bold mb-1">
+                                            <i class="bi bi-bricks text-warning"></i>
+                                            Unidades da obra
+                                        </h2>
+                                        <p class="text-muted mb-0" id="obraContexto">
+                                            Etapa atual: <span data-field="obra-etapa-atual">-</span> |
+                                            Encarregado geral: <span data-field="obra-encarregado-geral">-</span>
+                                        </p>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div id="casas-grid" class="modern-grid">
+                                <div class="card card-dashboard border-0 shadow-sm mb-4">
+                                    <div class="card-body">
+                                        <div class="row g-3 align-items-end">
+                                            <div class="col-12 col-md-6 col-lg-3">
+                                                <label for="filterBuscaUnidade"
+                                                    class="form-label fw-semibold">Casa</label>
+                                                <input type="text" class="form-control" id="filterBuscaUnidade"
+                                                    placeholder="Buscar por número da casa">
+                                            </div>
+
+                                            <div class="col-12 col-md-6 col-lg-2">
+                                                <label for="filterEtapaUnidade"
+                                                    class="form-label fw-semibold">Etapa</label>
+                                                <select class="form-select" id="filterEtapaUnidade">
+                                                    <option value="">Todas</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-12 col-md-6 col-lg-2">
+                                                <label for="filterStatusUnidade"
+                                                    class="form-label fw-semibold">Status</label>
+                                                <select class="form-select" id="filterStatusUnidade">
+                                                    <option value="">Todos</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-12 col-md-6 col-lg-3">
+                                                <label for="filterLiderUnidade"
+                                                    class="form-label fw-semibold">Líder</label>
+                                                <select class="form-select" id="filterLiderUnidade">
+                                                    <option value="">Todos</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-12 col-lg-2">
+                                                <div class="d-flex gap-2">
+                                                    <button class="btn btn-primary-custom text-white flex-fill"
+                                                        id="btnFiltrarUnidades" type="button">
+                                                        Filtrar
+                                                    </button>
+                                                    <button class="btn btn-outline-secondary flex-fill"
+                                                        id="btnLimparFiltrosUnidades" type="button">
+                                                        Limpar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- GRID PARA RECEBER CARDS VIA RENDER -->
+                                <div id="unidadesGrid" class="modern-grid">
+                                    <!-- render da API -->
+                                </div>
+                            </section>
+
+                            <!-- =========================================
+             TELA: DETALHE DA UNIDADE
+        ========================================== -->
+                            <section id="unidadesDetailScreen" class="unidades-screen d-none">
+                                <div class="card card-dashboard border-0 shadow-sm mb-4">
+                                    <div class="card-body">
+                                        <div class="d-flex flex-wrap align-items-center gap-3">
+                                            <button class="btn btn-outline-secondary btn-sm" id="btnVoltarGrid"
+                                                type="button">
+                                                <i class="bi bi-arrow-left"></i>
+                                                Voltar
+                                            </button>
+
+                                            <div class="detail-topbar-meta">
+                                                <span class="detail-topbar-title fw-bold" id="detailCasaTitulo">Casa
+                                                    -</span>
+                                                <span class="detail-topbar-divider">|</span>
+                                                <span class="text-muted" id="detailCasaEtapa">Etapa: -</span>
+                                                <span class="detail-topbar-divider">|</span>
+                                                <span class="text-muted" id="detailCasaLider">Líder: -</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card card-dashboard border-0 shadow-sm mb-4">
+                                    <div class="card-body py-3">
+                                        <div class="d-flex flex-wrap gap-2" id="detailTabsNav">
+                                            <button class="btn unidade-tab-btn active" type="button"
+                                                data-tab="visao-geral">Visão geral</button>
+                                            <button class="btn unidade-tab-btn" type="button"
+                                                data-tab="ocorrencias">Ocorrências</button>
+                                            <button class="btn unidade-tab-btn" type="button"
+                                                data-tab="solicitacoes">Solicitações</button>
+                                            <button class="btn unidade-tab-btn" type="button"
+                                                data-tab="equipe">Equipe</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="unidadeFeedbackArea" class="mb-3"></div>
+
+                                <!-- A ABA ATIVA SERÁ RENDERIZADA AQUI -->
+                                <div id="detailBodyContent"></div>
+                            </section>
+                        </div>
+
+                        <!-- =========================================
+         MODAL DE CANCELAMENTO
+    ========================================== -->
+                        <div class="modal fade" id="cancelarRegistroModal" tabindex="-1"
+                            aria-labelledby="cancelarRegistroModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content border-0 shadow">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="cancelarRegistroModalLabel">Confirmar cancelamento
+                                        </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Fechar"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Deseja realmente cancelar este registro? Os dados preenchidos serão descartados.
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-secondary"
+                                            data-bs-dismiss="modal">Voltar</button>
+                                        <button type="button" class="btn btn-danger"
+                                            id="confirmarCancelamentoRegistro">Confirmar</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <div id="tela-detalhe-unidade" class="p-4 d-none">
+                        <!-- =========================================
+         TEMPLATES INTERNOS PARA RENDER
+    ========================================== -->
+                        <div id="unidadesTemplates">
 
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3"
-                                    onclick="navegarPara('grid')">
-                                    <i class="bi bi-arrow-left"></i> Voltar para Lista
-                                </button>
-                                <span class="text-muted small">ID da Unidade: <span
-                                        id="unidade-id-display">--</span></span>
-                            </div>
+                            <!-- TEMPLATE: CARD DO GRID -->
+                            <template id="template-unidade-card">
+                                <div class="modern-card unidade-card" data-unit-id="">
+                                    <div class="modern-card-header">
+                                        <div>
+                                            <div class="unidade-numero" data-field="numero-casa">Casa -</div>
+                                            <p class="modern-card-subtitle mb-0" data-field="rua-unidade">-</p>
+                                        </div>
 
-                            <div class="row g-4 align-items-start">
+                                        <span class="badge modern-card-badge" data-field="status-unidade">-</span>
+                                    </div>
 
-                                <div class="col-lg-8">
-                                    <div class="card shadow-sm border-0 mb-4" id="conteudo-detalhe-geral"></div>
+                                    <div class="unidade-resumo-list">
+                                        <div class="unidade-resumo-item">
+                                            <span class="unidade-meta-label">Etapa</span>
+                                            <span class="unidade-meta-value" data-field="etapa-unidade">-</span>
+                                        </div>
 
-                                    <div class="card shadow-sm border-0 p-4 mb-4">
-                                        <h5 class="fw-bold mb-3 d-flex align-items-center">
-                                            <i class="bi bi-box-seam text-primary me-2"></i> Materiais Alocados
-                                        </h5>
-                                        <div class="scroll-container-materiais pe-2 custom-scrollbar">
-                                            <div class="row g-2" id="lista-materiais"></div>
+                                        <div class="unidade-resumo-item">
+                                            <span class="unidade-meta-label">Líder</span>
+                                            <span class="unidade-meta-value" data-field="lider-unidade">-</span>
+                                        </div>
+
+                                        <div class="unidade-resumo-item">
+                                            <span class="unidade-meta-label">Equipe</span>
+                                            <span class="unidade-meta-value" data-field="resumo-equipe-unidade">-</span>
                                         </div>
                                     </div>
 
-                                    <div class="card shadow-sm border-0 p-4">
-                                        <h5 class="fw-bold mb-3 d-flex align-items-center">
-                                            <i class="bi bi-people text-success me-2"></i> Equipe em Campo
-                                        </h5>
-                                        <div class="table-responsive-equipe custom-scrollbar">
-                                            <table class="table table-hover align-middle custom-table mb-0">
-                                                <thead class="table-light">
-                                                    <tr>
-                                                        <th>Colaborador</th>
-                                                        <th>Função</th>
-                                                        <th>Departamento</th>
-                                                        <th>Data Alocado</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="tabela-equipe-corpo"></tbody>
-                                            </table>
+                                    <div class="mt-3">
+                                        <div class="modern-card-stats">
+                                            <span>Avanço</span>
+                                            <span data-field="progresso-unidade">0%</span>
+                                        </div>
+
+                                        <div class="modern-progress-bg">
+                                            <div class="modern-progress-bar" data-field="progresso-barra"
+                                                style="width: 0%;"></div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="col-lg-4">
+                                    <div class="d-flex justify-content-between gap-2 mt-3 flex-wrap">
+                                        <span class="badge text-bg-light border">
+                                            Ocorrências abertas:
+                                            <span data-field="ocorrencias-abertas">0</span>
+                                        </span>
 
-                                    <div class="card p-3 mb-4 shadow-sm border-0 bg-primary text-white text-center">
-                                        <p class="small mb-2 opacity-75">Ações Rápidas</p>
-                                        <button class="btn btn-light btn-sm w-100 fw-bold py-2"
-                                            onclick="navegarPara('checklist')">
-                                            <i class="bi bi-check2-square"></i> ABRIR CHECKLIST
+                                        <span class="badge text-bg-light border">
+                                            Solicitações abertas:
+                                            <span data-field="solicitacoes-abertas">0</span>
+                                        </span>
+                                    </div>
+
+                                    <div class="unidade-card-actions mt-3">
+                                        <button class="btn btn-primary-custom text-white btn-sm btn-open-unit"
+                                            type="button" data-action="abrir-detalhe">
+                                            Ver detalhes
                                         </button>
                                     </div>
+                                </div>
+                            </template>
 
-                                    <div class="card shadow-sm border-0 p-3 card-ocorrencias-wrapper">
-                                        <h6 class="fw-bold mb-3 d-flex justify-content-between align-items-center">
-                                            <span><i
-                                                    class="bi bi-exclamation-triangle text-warning me-2"></i>Ocorrências</span>
-                                            <span class="badge bg-light text-dark rounded-pill"
-                                                id="count-ocorrencias">0</span>
-                                        </h6>
-                                        <div id="lista-ocorrencias" class="pe-2 custom-scrollbar">
+                            <!-- TEMPLATE: EMPTY STATE DO GRID -->
+                            <template id="template-unidades-empty-state">
+                                <div class="empty-state-box">
+                                    <i class="bi bi-search fs-1 d-block mb-3"></i>
+                                    <h5 class="fw-bold mb-2">Nenhuma unidade encontrada</h5>
+                                    <p class="mb-0">Ajuste os filtros para visualizar outras unidades.</p>
+                                </div>
+                            </template>
+
+                            <!-- TEMPLATE: ABA VISÃO GERAL -->
+                            <template id="template-unidades-visao-geral">
+                                <div class="unidade-tab-panel" id="tab-visao-geral">
+                                    <div class="row g-4">
+                                        <div class="col-12">
+                                            <div class="info-card p-4">
+                                                <h3 class="unidade-section-title">Informações gerais da unidade</h3>
+
+                                                <div class="info-grid">
+                                                    <div class="info-grid-item">
+                                                        <span class="info-grid-item-label">Casa</span>
+                                                        <span class="info-grid-item-value"
+                                                            data-field="unidade-casa">-</span>
+                                                    </div>
+
+                                                    <div class="info-grid-item">
+                                                        <span class="info-grid-item-label">Etapa atual</span>
+                                                        <span class="info-grid-item-value"
+                                                            data-field="unidade-etapa">-</span>
+                                                    </div>
+
+                                                    <div class="info-grid-item">
+                                                        <span class="info-grid-item-label">Líder</span>
+                                                        <span class="info-grid-item-value"
+                                                            data-field="unidade-lider">-</span>
+                                                    </div>
+
+                                                    <div class="info-grid-item">
+                                                        <span class="info-grid-item-label">Rua / localização</span>
+                                                        <span class="info-grid-item-value"
+                                                            data-field="unidade-rua">-</span>
+                                                    </div>
+
+                                                    <div class="info-grid-item">
+                                                        <span class="info-grid-item-label">Data de início</span>
+                                                        <span class="info-grid-item-value"
+                                                            data-field="unidade-data-inicio">-</span>
+                                                    </div>
+
+                                                    <div class="info-grid-item">
+                                                        <span class="info-grid-item-label">Status operacional</span>
+                                                        <span class="info-grid-item-value"
+                                                            data-field="unidade-status">-</span>
+                                                    </div>
+
+                                                    <div class="info-grid-item">
+                                                        <span class="info-grid-item-label">Resumo da equipe</span>
+                                                        <span class="info-grid-item-value"
+                                                            data-field="unidade-resumo-equipe">-</span>
+                                                    </div>
+
+                                                    <div class="info-grid-item">
+                                                        <span class="info-grid-item-label">Avanço resumido</span>
+                                                        <span class="info-grid-item-value"
+                                                            data-field="unidade-avanco">-</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-xl-6">
+                                            <div class="quick-list-card p-4 h-100">
+                                                <h3 class="unidade-section-title">Ocorrências recentes</h3>
+                                                <div id="overviewOcorrenciasRecentes" class="quick-list">
+                                                    <!-- render da API -->
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-xl-6">
+                                            <div class="quick-list-card p-4 h-100">
+                                                <h3 class="unidade-section-title">Solicitações recentes</h3>
+                                                <div id="overviewSolicitacoesRecentes" class="quick-list">
+                                                    <!-- render da API -->
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="quick-list-card p-4">
+                                                <h3 class="unidade-section-title">Histórico rápido</h3>
+                                                <div id="overviewHistoricoRapido" class="quick-history-list">
+                                                    <!-- render da API -->
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-
                                 </div>
+                            </template>
 
-                            </div>
+                            <!-- TEMPLATE: ITEM DE LISTA RÁPIDA -->
+                            <template id="template-quick-list-item">
+                                <div class="quick-list-item">
+                                    <div class="quick-list-item-header">
+                                        <span class="quick-list-item-title" data-field="quick-item-codigo">#-</span>
+                                        <span class="badge border" data-field="quick-item-status">-</span>
+                                    </div>
+
+                                    <p class="quick-list-item-text mb-2" data-field="quick-item-titulo">-</p>
+                                    <small class="text-muted" data-field="quick-item-data">-</small>
+                                </div>
+                            </template>
+
+                            <!-- TEMPLATE: ITEM DE HISTÓRICO -->
+                            <template id="template-quick-history-item">
+                                <div class="quick-history-item">
+                                    <span class="quick-history-dot"></span>
+                                    <div class="quick-history-content">
+                                        <div class="fw-semibold" data-field="historico-texto">-</div>
+                                        <div class="text-muted small mt-1" data-field="historico-data">-</div>
+                                    </div>
+                                </div>
+                            </template>
+
+                            <!-- TEMPLATE: EMPTY STATE DE LISTAS -->
+                            <template id="template-empty-list-state">
+                                <div class="empty-state-box">
+                                    <p class="mb-0" data-field="empty-message">Nenhum item encontrado.</p>
+                                </div>
+                            </template>
+
+                            <!-- TEMPLATE: ABA OCORRÊNCIAS -->
+                            <template id="template-unidades-ocorrencias">
+                                <div class="unidade-tab-panel" id="tab-ocorrencias">
+                                    <div class="unidade-content-grid">
+                                        <div class="table-block-card p-4">
+                                            <div class="table-block-header">
+                                                <div>
+                                                    <h3 class="unidade-section-title mb-1">Ocorrências da unidade</h3>
+                                                    <p class="text-muted mb-0">Acompanhe e filtre as ocorrências da casa
+                                                        selecionada.</p>
+                                                </div>
+
+                                                <button class="btn btn-primary-custom text-white" id="btnNovaOcorrencia"
+                                                    type="button">
+                                                    Nova ocorrência
+                                                </button>
+                                            </div>
+
+                                            <div class="record-table-panel" id="ocorrenciasTablePanel">
+                                                <div class="table-block-toolbar">
+                                                    <div class="form-inline-filters">
+                                                        <div>
+                                                            <label class="form-label fw-semibold">Status</label>
+                                                            <select class="form-select" id="ocorrenciaStatusFilter">
+                                                                <option value="">Todos</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div>
+                                                            <label class="form-label fw-semibold">Código da
+                                                                ocorrência</label>
+                                                            <input type="text" class="form-control"
+                                                                id="ocorrenciaCodigoFilter"
+                                                                placeholder="Digite o código">
+                                                        </div>
+
+                                                        <div>
+                                                            <label class="form-label fw-semibold">Data</label>
+                                                            <input type="date" class="form-control"
+                                                                id="ocorrenciaDataFilter">
+                                                        </div>
+
+                                                        <div class="d-flex align-items-end">
+                                                            <button class="btn btn-outline-secondary w-100"
+                                                                id="btnFiltrarOcorrencias" type="button">
+                                                                Filtrar
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="record-table-wrap">
+                                                    <table class="table custom-table align-middle mb-0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Ocorrência</th>
+                                                                <th>Título</th>
+                                                                <th>Status</th>
+                                                                <th>Data</th>
+                                                                <th>Descrição</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="ocorrenciasTableBody">
+                                                            <!-- render da API -->
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <div class="record-form-panel" id="ocorrenciasFormPanel">
+                                                <div class="mb-4">
+                                                    <h4 class="fw-bold mb-1">Nova ocorrência</h4>
+                                                    <p class="text-muted mb-0">Formulário preparado para integração
+                                                        posterior com backend.</p>
+                                                </div>
+
+                                                <form id="novaOcorrenciaForm">
+                                                    <div class="row g-3">
+                                                        <div class="col-12 col-md-3">
+                                                            <label class="form-label fw-semibold">Data</label>
+                                                            <input type="date" class="form-control" name="data">
+                                                        </div>
+
+                                                        <div class="col-12 col-md-3">
+                                                            <label class="form-label fw-semibold">Status</label>
+                                                            <select class="form-select" name="status">
+                                                                <option value="aberta">Aberta</option>
+                                                                <option value="analise">Em análise</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <label class="form-label fw-semibold">Descrição</label>
+                                                            <textarea class="form-control" name="descricao"
+                                                                rows="4"></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="d-flex justify-content-end gap-2 mt-4 flex-wrap">
+                                                        <button type="button" class="btn btn-outline-secondary"
+                                                            id="btnCancelarNovaOcorrencia">
+                                                            Cancelar
+                                                        </button>
+                                                        <button type="submit" class="btn btn-primary-custom text-white">
+                                                            Salvar
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                        <aside class="side-queue-card p-4">
+                                            <h3 class="unidade-section-title">Fila de ocorrências abertas</h3>
+                                            <div id="ocorrenciasQueueList" class="queue-list">
+                                                <!-- render da API -->
+                                            </div>
+                                        </aside>
+                                    </div>
+                                </div>
+                            </template>
+
+                            <!-- TEMPLATE: ABA SOLICITAÇÕES -->
+                            <template id="template-unidades-solicitacoes">
+                                <div class="unidade-tab-panel" id="tab-solicitacoes">
+                                    <div class="unidade-content-grid">
+                                        <div class="table-block-card p-4">
+                                            <div class="table-block-header">
+                                                <div>
+                                                    <h3 class="unidade-section-title mb-1">Solicitações da unidade</h3>
+                                                    <p class="text-muted mb-0">Acompanhe e filtre as solicitações de
+                                                        materiais da casa.</p>
+                                                </div>
+
+                                                <button class="btn btn-primary-custom text-white"
+                                                    id="btnNovaSolicitacao" type="button">
+                                                    Nova solicitação
+                                                </button>
+                                            </div>
+
+                                            <div class="record-table-panel" id="solicitacoesTablePanel">
+                                                <div class="table-block-toolbar">
+                                                    <div class="form-inline-filters">
+                                                        <div>
+                                                            <label class="form-label fw-semibold">Status</label>
+                                                            <select class="form-select" id="solicitacaoStatusFilter">
+                                                                <option value="">Todos</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div>
+                                                            <label class="form-label fw-semibold">Código da
+                                                                solicitação</label>
+                                                            <input type="text" class="form-control"
+                                                                id="solicitacaoCodigoFilter"
+                                                                placeholder="Digite o código">
+                                                        </div>
+
+                                                        <div>
+                                                            <label class="form-label fw-semibold">Data</label>
+                                                            <input type="date" class="form-control"
+                                                                id="solicitacaoDataFilter">
+                                                        </div>
+
+                                                        <div class="d-flex align-items-end">
+                                                            <button class="btn btn-outline-secondary w-100"
+                                                                id="btnFiltrarSolicitacoes" type="button">
+                                                                Filtrar
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="record-table-wrap">
+                                                    <table class="table custom-table align-middle mb-0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Solicitação</th>
+                                                                <th>Título</th>
+                                                                <th>Status</th>
+                                                                <th>Data</th>
+                                                                <th>Descrição</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="solicitacoesTableBody">
+                                                            <!-- render da API -->
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <div class="record-form-panel" id="solicitacoesFormPanel">
+                                                <div class="mb-4">
+                                                    <h4 class="fw-bold mb-1">Nova solicitação</h4>
+                                                    <p class="text-muted mb-0">Formulário preparado para integração
+                                                        posterior com backend.</p>
+                                                </div>
+
+                                                <form id="novaSolicitacaoForm">
+                                                    <div class="row g-3">
+                                                        <div class="col-12 col-md-6">
+                                                            <label class="form-label fw-semibold">Material</label>
+                                                            <select class="form-select" name="id_armazem" required>
+                                                                <option value="">Selecione o material</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-12 col-md-6">
+                                                            <label class="form-label fw-semibold">Solicitante</label>
+                                                            <select class="form-select" name="id_colaborador" required>
+                                                                <option value="">Selecione o solicitante</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-12 col-md-3">
+                                                            <label class="form-label fw-semibold">Quantidade</label>
+                                                            <input type="number" class="form-control" name="quantidade"
+                                                                min="1" required>
+                                                        </div>
+
+                                                        <div class="col-12 col-md-3">
+                                                            <label class="form-label fw-semibold">Status</label>
+                                                            <select class="form-select" name="status" required>
+                                                                <option value="PENDENTE" selected>Pendente</option>
+                                                                <option value="EM ANÁLISE">Em análise</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-12 col-md-6">
+                                                            <label class="form-label fw-semibold">Observação</label>
+                                                            <input type="text" class="form-control"
+                                                                value="Gerado automaticamente" disabled>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <label class="form-label fw-semibold">Justificativa</label>
+                                                            <textarea class="form-control" name="descricao" rows="4"
+                                                                placeholder="Descreva o motivo da solicitação"
+                                                                required></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="d-flex justify-content-end gap-2 mt-4 flex-wrap">
+                                                        <button type="button" class="btn btn-outline-secondary"
+                                                            id="btnCancelarNovaSolicitacao">
+                                                            Cancelar
+                                                        </button>
+                                                        <button type="submit" class="btn btn-primary-custom text-white">
+                                                            Salvar
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                        <aside class="side-queue-card p-4">
+                                            <h3 class="unidade-section-title">Fila de solicitações abertas</h3>
+                                            <div id="solicitacoesQueueList" class="queue-list">
+                                                <!-- render da API -->
+                                            </div>
+                                        </aside>
+                                    </div>
+                                </div>
+                            </template>
+
+                            <!-- TEMPLATE: LINHA DA TABELA DE OCORRÊNCIAS -->
+                            <template id="template-ocorrencia-table-row">
+                                <tr>
+                                    <td class="fw-semibold" data-field="ocorrencia-codigo">#-</td>
+                                    <td data-field="ocorrencia-titulo">-</td>
+                                    <td data-field="ocorrencia-status-cell">-</td>
+                                    <td data-field="ocorrencia-data">-</td>
+                                    <td data-field="ocorrencia-descricao">-</td>
+                                </tr>
+                            </template>
+
+                            <!-- TEMPLATE: LINHA DA TABELA DE SOLICITAÇÕES -->
+                            <template id="template-solicitacao-table-row">
+                                <tr>
+                                    <td class="fw-semibold" data-field="solicitacao-codigo">#-</td>
+                                    <td data-field="solicitacao-titulo">-</td>
+                                    <td data-field="solicitacao-status-cell">-</td>
+                                    <td data-field="solicitacao-data">-</td>
+                                    <td data-field="solicitacao-descricao">-</td>
+                                </tr>
+                            </template>
+
+                            <!-- TEMPLATE: CARD DA FILA LATERAL -->
+                            <template id="template-queue-card">
+                                <div class="queue-card">
+                                    <div class="queue-code" data-field="queue-codigo">#-</div>
+                                    <button class="btn btn-outline-secondary btn-sm w-100" type="button"
+                                        data-action="exibir-detalhes">
+                                        Exibir detalhes
+                                    </button>
+                                </div>
+                            </template>
+
+                            <!-- TEMPLATE: ABA EQUIPE -->
+                            <template id="template-unidades-equipe">
+                                <div class="unidade-tab-panel" id="tab-equipe">
+                                    <div class="team-card p-4">
+                                        <div class="team-toolbar">
+                                            <div>
+                                                <h3 class="unidade-section-title mb-1">Equipe da unidade</h3>
+                                                <p class="text-muted mb-0">
+                                                    Visualize e gerencie apenas a equipe atual vinculada a esta unidade.
+                                                </p>
+                                            </div>
+
+                                            <button class="btn btn-primary-custom text-white"
+                                                id="btnAlocarTrabalhadores" type="button">
+                                                Alocar trabalhadores
+                                            </button>
+                                        </div>
+
+                                        <div class="team-filters mb-4">
+                                            <div>
+                                                <label class="form-label fw-semibold">Função</label>
+                                                <select class="form-select" id="teamFuncaoFilter">
+                                                    <option value="">Todas</option>
+                                                </select>
+                                            </div>
+
+                                            <div>
+                                                <label class="form-label fw-semibold">Pesquisar por nome</label>
+                                                <input type="text" class="form-control" id="teamNomeFilter"
+                                                    placeholder="Digite o nome">
+                                            </div>
+
+                                            <div>
+                                                <label class="form-label fw-semibold">Status</label>
+                                                <select class="form-select" id="teamStatusFilter">
+                                                    <option value="">Todos</option>
+                                                    <option value="alocado">Alocado</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div id="teamList" class="team-list">
+                                            <!-- render da API -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+
+                            <!-- TEMPLATE: CARD DE MEMBRO DA EQUIPE -->
+                            <template id="template-team-member-card">
+                                <div class="team-member-card">
+                                    <div class="team-member-header">
+                                        <div>
+                                            <div class="team-member-name" data-field="team-member-name">-</div>
+                                            <div class="team-member-role" data-field="team-member-role">-</div>
+                                        </div>
+
+                                        <div class="team-member-actions">
+                                            <button class="btn btn-outline-danger btn-sm" type="button"
+                                                data-action="retirar-trabalhador">
+                                                Retirar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+
+                            <!-- TEMPLATE: BADGE DE STATUS -->
+                            <template id="template-status-badge">
+                                <span class="badge status-badge"></span>
+                            </template>
                         </div>
                     </div>
-
 
 
                     <!-- ============================================================
@@ -1169,14 +1679,15 @@
                         <!-- conteúdo de relatórios -->
                     </div>
 
-                </div>
+                </main>
+
             </div>
         </div>
     </div>
-    <script src="../../js/ui/nav.js"></script>
+
+    <script src="../../shared/utils/nav.js"></script>
     <script src="../../public/login.js"></script>
-    <script src="inner.js"></script>
-    <script src="ui.js"></script>
+    <script type="module" src="./scripts/unidades.js"></script>
 </body>
 
 </html>
