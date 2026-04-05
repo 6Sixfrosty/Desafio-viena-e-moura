@@ -1,4 +1,4 @@
-export const API_BASE_URL = 'http://localhost:3000/';// 'https://construtech-api-production.up.railway.app/'  "http://localhost:3000"
+export const API_BASE_URL = 'https://construtech-api-production.up.railway.app/';
 
 export const FETCH_OPTIONS = {
     headers: {
