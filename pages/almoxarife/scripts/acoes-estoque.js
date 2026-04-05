@@ -1,4 +1,4 @@
-import { AlmoxarifeAPI } from '../../../core/api/almoxarife.js';
+import { AlmoxarifeAPI } from '../../../shared/api/almoxarife.js';
 
 const containerEmail = document.getElementById('containerEmailExport');
 const btnConfirmar = document.getElementById('btnConfirmarExport');
