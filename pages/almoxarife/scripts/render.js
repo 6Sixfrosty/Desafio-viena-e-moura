@@ -1,4 +1,4 @@
-﻿import { AlmoxarifeAPI } from '../../../shared/api/almoxarife.jss';
+﻿import { AlmoxarifeAPI } from '../../../shared/api/almoxarife.js';
 
 /* ====================================================================================================
                                             SQL & RENDER
