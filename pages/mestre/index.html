@@ -14,6 +14,7 @@
 
     <link rel="stylesheet" href="../../shared/styles/main.css">
     <link rel="stylesheet" href="./styles/unidades.css">
+     <link rel="stylesheet" href="./styles/checklist.css">
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
@@ -45,7 +46,7 @@
                             <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-1 gap-lg-2 mt-3 mt-lg-0" id="navMenu">
                                 <li class="nav-item">
                                     <a class="nav-link menu-link active d-flex align-items-center gap-2 px-3 py-2 rounded-3"
-                                        data-page="checklist" href="#">
+                                        data-page="checklistPanel" href="#">
                                         <i class="bi bi-clipboard-check fs-5"></i> <span>Checklist</span>
                                     </a>
                                 </li>
@@ -115,8 +116,151 @@
                          ID: #checklist | Painel inicial (active no nav-link)
                          Controlado por: nav.js → Nav(elemento, 'checklist')
                     ============================================================ -->
-                    <div id="checklist" class="p-4">
-                    </div>
+                    <div id="checklistPanel" class="container py-4">
+                    
+
+    <!-- CABEÇALHO COM TÍTULO E SELETOR DE UNIDADE -->
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+        <h2 class="fw-bold">
+          <i class="bi bi-clipboard-check text-warning"></i>
+          Checklist da Obra
+        </h2>
+        <p class="text-muted">
+          Acompanhamento diário das atividades por unidade - Com responsáveis, horários e pendências
+        </p>
+      </div>
+
+      <!-- Dropdown para selecionar a unidade/obra -->
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+          <i class="bi bi-building"></i> Unidade: <span id="unidadeChecklistLabel">Casa 01</span>
+        </button>
+        <ul class="dropdown-menu" id="unidadeSelectChecklist">
+          <li><a class="dropdown-item" data-unidade-id="1" href="#">Casa 01 - Residencial Jardins (85% - Acabamento)</a></li>
+          <li><a class="dropdown-item" data-unidade-id="2" href="#">Casa 02 - Residencial Jardins (45% - Alvenaria)</a></li>
+          <li><a class="dropdown-item" data-unidade-id="3" href="#">Casa 03 - Residencial Jardins (15% - Fundação)</a></li>
+        </ul>
+      </div>
+    </id=>
+
+    <!-- ======================================================== -->
+    <!-- CARDS DE RESUMO DA UNIDADE                               -->
+    <!-- Mostram informações gerais da obra selecionada          -->
+    <!-- ======================================================== -->
+    <div class="row mb-4">
+      <!-- Card: Fase Atual -->
+      <div class="col-md-4">
+        <div class="card card-dashboard p-3 border-start border-4 border-primary">
+          <small class="text-muted">Fase Atual</small>
+          <h5 class="fw-bold mb-0" id="faseAtualLabel">Fundação</h5>
+        </div>
+      </div>
+
+      <!-- Card: Progresso da Unidade -->
+      <div class="col-md-4">
+        <div class="card card-dashboard p-3 border-start border-4 border-success">
+          <small class="text-muted">Progresso da Unidade</small>
+          <h5 class="fw-bold mb-0" id="progressoUnidadeLabel">15%</h5>
+          <div class="progress mt-2" style="height: 6px;">
+            <div id="progressoUnidadeBar" class="progress-bar bg-success" style="width: 15%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card: Dia da Obra e Status de Sincronia -->
+      <div class="col-md-4">
+        <div class="card card-dashboard p-3 border-start border-4 border-warning">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <small class="text-muted">Dia da Obra</small>
+              <h5 class="fw-bold mb-0" id="diaObraLabel">Dia 1</h5>
+              <small class="text-muted">Checklist diário</small>
+            </div>
+            <!-- Indicador de sincronia com localStorage -->
+            <span class="badge bg-success" id="statusSync">
+                            <i class="bi bi-cloud-check"></i> Sincronizado
+                        </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- BOTÕES DE DIAS (FIXOS DE 1 A 8)                          -->
+    <!-- Permite navegar entre os dias do checklist              -->
+    <!-- ======================================================== -->
+    <div class="d-flex flex-wrap gap-2 mb-4" id="diasBotoes"></div>
+
+    <!-- ======================================================== -->
+    <!-- BARRA DE PROGRESSO DO CHECKLIST DO DIA                   -->
+    <!-- Mostra quantas tarefas foram concluídas hoje            -->
+    <!-- ======================================================== -->
+    <div class="card card-dashboard p-3 mb-4">
+      <div class="d-flex justify-content-between">
+                <span>
+                    <i class="bi bi-check2-circle text-success"></i>
+                    Conclusão do Checklist de Hoje
+                </span>
+        <span id="progressoPercentualCheck" class="fw-bold">0%</span>
+      </div>
+      <div class="progress" style="height: 10px;">
+        <div id="progressBarCheck" class="progress-bar progress-bar-custom" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- CONTAINER DO FORMULÁRIO DO CHECKLIST                     -->
+    <!-- As tarefas são geradas dinamicamente via JavaScript     -->
+    <!-- ======================================================== -->
+    <div id="checklistFormContainer"></div>
+
+    <!-- ======================================================== -->
+    <!-- BOTÃO PARA ENVIAR RELATÓRIO                              -->
+    <!-- Gera um resumo do dia e salva no histórico              -->
+    <!-- ======================================================== -->
+    <div class="mt-3 d-flex gap-3">
+      <button id="btnEnviarRelatorio" class="btn btn-primary-custom">
+        <i class="bi bi-send-check"></i> Enviar Relatório do Dia
+      </button>
+    </div>
+  </div>
+<!-- ============================================================ -->
+<!-- MODAL DE PENDÊNCIA                                           -->
+<!-- Exibe um formulário para justificar quando uma tarefa       -->
+<!-- não pode ser concluída no dia                               -->
+<!-- ============================================================ -->
+<div class="modal fade" id="pendenciaModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-warning">
+        <h5 class="modal-title">
+          <i class="bi bi-exclamation-triangle"></i> Registrar Pendência
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Tarefa:</strong> <span id="pendenciaTarefaNome"></span></p>
+        <label class="form-label">Motivo da Pendência</label>
+        <select id="pendenciaMotivo" class="form-select mb-3">
+          <option value="Aguardando material">Aguardando material</option>
+          <option value="Chuva/condições climáticas">Chuva/condições climáticas</option>
+          <option value="Falta de equipe">Falta de equipe</option>
+          <option value="Equipamento quebrado">Equipamento quebrado</option>
+          <option value="Replanejamento da obra">Replanejamento da obra</option>
+          <option value="Outros">Outros</option>
+        </select>
+        <label class="form-label">Observações adicionais</label>
+        <textarea id="pendenciaObs" rows="3" class="form-control" placeholder="Detalhe o motivo..."></textarea>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button class="btn btn-warning" id="confirmarPendenciaBtn">
+          <i class="bi bi-flag"></i> Registrar Pendência
+        </button>
+        </div>
+    </div>
+  </div>
+</div>
 
 
 
@@ -427,8 +571,8 @@
                         </div>
 
                         <!-- =========================================
-         TEMPLATES INTERNOS PARA RENDER
-    ========================================== -->
+                                TEMPLATES INTERNOS PARA RENDER
+                            ========================================== -->
                         <div id="unidadesTemplates">
 
                             <!-- TEMPLATE: CARD DO GRID -->
@@ -1229,6 +1373,11 @@
     <script src="../../shared/utils/nav.js"></script>
     <script src="../../public/login.js"></script>
     <script type="module" src="./scripts/unidades.js"></script>
+    <!-- Bootstrap JS (para dropdowns e modais) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript Principal -->
+    <script src="./scripts/checklist.js"></script>
 </body>
 
 </html>
